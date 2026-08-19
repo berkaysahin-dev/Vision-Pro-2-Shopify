@@ -325,6 +325,36 @@
         "id": "pdp_enable_trust_badges",
         "label": "Show Security & Trust Badges below Add to Cart",
         "default": true
+      },
+      {
+        "type": "color",
+        "id": "pdp_shipping_badge_bg",
+        "label": "Express Shipping Banner Background",
+        "default": "#F0FDF4"
+      },
+      {
+        "type": "color",
+        "id": "pdp_shipping_badge_text",
+        "label": "Express Shipping Banner Text Color",
+        "default": "#166534"
+      },
+      {
+        "type": "color",
+        "id": "pdp_shipping_badge_border",
+        "label": "Express Shipping Banner Border Color",
+        "default": "#BBF7D0"
+      },
+      {
+        "type": "color",
+        "id": "pdp_stock_pulse_color",
+        "label": "Live Stock Pulse Indicator Color",
+        "default": "#E11D48"
+      },
+      {
+        "type": "color",
+        "id": "pdp_stock_text_color",
+        "label": "Stock Urgency Text Color",
+        "default": "#111827"
       }
     ]
   },

@@ -78,21 +78,21 @@
           {%- endif -%}
         </div>
 
-        <!-- Free Worldwide Express Banner -->
-        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--border-radius); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 12px; color: #065F46; font-weight: 500;">
+        <!-- Free Worldwide Express Banner (Fully Color Customizable) -->
+        <div style="background-color: {{ settings.pdp_shipping_badge_bg | default: '#F0FDF4' }}; border: 1px solid {{ settings.pdp_shipping_badge_border | default: '#BBF7D0' }}; color: {{ settings.pdp_shipping_badge_text | default: '#166534' }}; border-radius: var(--border-radius); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 12px; font-weight: 500;">
           <span>✨</span>
           <span><strong>Complimentary Worldwide Express</strong> unlocked for this piece (DHL Priority).</span>
         </div>
 
-        <!-- Scarcity Stock Indicator -->
+        <!-- Scarcity Stock Indicator (Fully Color Customizable) -->
         {%- if settings.pdp_enable_live_stock -%}
-          <div class="product-stock-urgency">
+          <div class="product-stock-urgency" style="color: {{ settings.pdp_stock_text_color | default: '#111827' }};">
             <div class="product-stock-urgency__header">
-              <span class="product-stock-urgency__pulse"></span>
-              <span>⚡ {{ 'products.product.only_left' | t: count: 4 | default: 'Only 4 units remaining in current numbered production batch' }}</span>
+              <span class="product-stock-urgency__pulse" style="background-color: {{ settings.pdp_stock_pulse_color | default: '#E11D48' }}; box-shadow: 0 0 0 0 {{ settings.pdp_stock_pulse_color | default: '#E11D48' }}40;"></span>
+              <span>⚡ {{ 'products.product.only_left' | t: count: 4 | default: 'Only 4 units left in stock' }}</span>
             </div>
             <div class="product-stock-urgency__bar">
-              <div class="product-stock-urgency__bar-fill" style="width: 25%;"></div>
+              <div class="product-stock-urgency__bar-fill" style="width: 25%; background-color: {{ settings.pdp_stock_pulse_color | default: 'var(--color-primary)' }};"></div>
             </div>
           </div>
         {%- endif -%}

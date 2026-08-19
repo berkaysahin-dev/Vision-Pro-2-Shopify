@@ -161,13 +161,6 @@
         "bg_color": "#F8F9FA"
       }
     },
-    "brand_logos": {
-      "type": "brand-logos",
-      "settings": {
-        "title": "FEATURED IN GLOBAL ARCHITECTURAL PUBLICATIONS",
-        "bg_color": "#FFFFFF"
-      }
-    },
     "faq": {
       "type": "faq-accordion",
       "settings": {
@@ -195,7 +188,6 @@
     "product_showcase",
     "cinematic_banner",
     "before_after",
-    "brand_logos",
     "faq",
     "newsletter"
   ]
