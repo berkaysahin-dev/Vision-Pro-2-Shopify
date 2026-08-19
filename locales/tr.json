@@ -1,0 +1,162 @@
+{
+  "general": {
+    "search": {
+      "search": "Ürün, koleksiyon veya içerik ara...",
+      "placeholder": "Ne arıyorsunuz?",
+      "no_results": "\"{{ terms }}\" için sonuç bulunamadı",
+      "results_with_count": {
+        "one": "{{ count }} sonuç bulundu",
+        "other": "{{ count }} sonuç bulundu"
+      },
+      "view_all": "Tüm {{ count }} sonucu görüntüle",
+      "popular_searches": "Popüler Aramalar",
+      "suggested_products": "Önerilen Parçalar",
+      "suggested_collections": "Koleksiyonları Keşfet"
+    },
+    "accessibility": {
+      "skip_to_text": "İçeriğe atla",
+      "close": "Kapat",
+      "open_menu": "Menüyü Aç",
+      "close_menu": "Menüyü Kapat",
+      "open_cart": "Sepeti Aç",
+      "close_cart": "Sepeti Kapat",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "star_rating": "5 üzerinden {{ rating }} yıldız"
+    },
+    "breadcrumbs": {
+      "home": "Ana Sayfa"
+    },
+    "pagination": {
+      "previous": "Önceki Sayfa",
+      "next": "Sonraki Sayfa",
+      "load_more": "Daha Fazla Ürün Yükle",
+      "page_count": "Sayfa {{ current }} / {{ total }}"
+    },
+    "newsletter": {
+      "title": "Atelier Topluluğuna Katılın",
+      "subtitle": "Özel davetler, sezon ön gösterimleri ve tasarım perspektifleri için kaydolun.",
+      "placeholder": "E-posta adresinizi girin",
+      "button": "Kayıt Ol",
+      "success": "Bültenimize kaydoldunuz. Atelier'e hoş geldiniz.",
+      "error": "Lütfen geçerli bir e-posta adresi girin."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Sepete Ekle",
+      "buy_it_now": "Hemen Satın Al",
+      "sold_out": "Tükendi",
+      "unavailable": "Mevcut Değil",
+      "quantity": "Adet",
+      "regular_price": "Normal Fiyat",
+      "sale_price": "İndirimli Fiyat",
+      "unit_price": "Birim Fiyat",
+      "save_amount": "{{ saved_amount }} Kazanç (%{{ saved_percent }} İndirim)",
+      "only_left": "Stokta sadece {{ count }} adet kaldı",
+      "in_stock": "Stokta Mevcut — Hemen Kargoda",
+      "estimated_delivery": "{{ hours }}sa {{ minutes }}dk içinde sipariş verirseniz tahmini teslimat: {{ date }}",
+      "quick_view": "Hızlı Bakış",
+      "quick_add": "Hızlı Ekle",
+      "choose_options": "Seçenekleri Gör",
+      "size_guide": "Beden & Ölçü Rehberi",
+      "details": "Ürün Detayları",
+      "materials_care": "Materyal & Bakım",
+      "shipping_returns": "Kargo ve İade Koşulları",
+      "share": "Bu parçayı paylaş",
+      "added_to_cart": "Sepete Eklendi",
+      "color_swatch": "Renk: {{ color }}",
+      "size_selector": "Beden",
+      "trust_secure": "256-Bit SSL Güvenli Ödeme",
+      "trust_shipping": "1500 TL Üzeri Ücretsiz Hızlı Kargo",
+      "trust_returns": "30 Gün Kolay Değişim & İade",
+      "trust_warranty": "2 Yıl Ürün Garantisi"
+    },
+    "wishlist": {
+      "add": "Favorilere Ekle",
+      "added": "Favorilere Kaydedildi",
+      "title": "Kişisel İstek Listeniz",
+      "empty": "İstek listeniz şu anda boş.",
+      "explore": "Koleksiyonu Keşfet"
+    }
+  },
+  "cart": {
+    "title": "Alışveriş Sepeti",
+    "empty": "Alışveriş sepetiniz boş",
+    "empty_cta": "Yeni Gelenleri Keşfet",
+    "subtotal": "Ara Toplam",
+    "taxes_and_shipping_policy_at_checkout_html": "Kargo ve vergiler ödeme adımında hesaplanır",
+    "checkout": "Güvenli Ödemeye Geç",
+    "note": "Hediye Notu veya Sipariş Notu Ekle",
+    "note_placeholder": "Özel teslimat notu veya hediye mesajı...",
+    "remove": "Ürünü kaldır",
+    "quantity_decrease": "Adeti azalt",
+    "quantity_increase": "Adeti artır",
+    "upsell_title": "Tarzınızı Tamamlayın",
+    "add_upsell": "Ekle +",
+    "free_shipping": {
+      "progress": "Ücretsiz kargo için {{ amount }} daha ekleyin",
+      "unlocked": "✨ Tebrikler! Ücretsiz Hızlı Kargo kazandınız."
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Koleksiyonlar",
+      "filter_by": "Filtrele & Sırala",
+      "sort_by": "Sırala",
+      "clear_all": "Tümünü Temizle",
+      "items_count": {
+        "one": "{{ count }} ürün",
+        "other": "{{ count }} ürün"
+      },
+      "no_products": "Seçilen filtrelerle eşleşen ürün bulunamadı.",
+      "grid_view": "Izgara Görünümü",
+      "list_view": "Liste Görünümü"
+    },
+    "sorting": {
+      "featured": "Öne Çıkanlar",
+      "best_selling": "En Çok Satanlar",
+      "price_ascending": "Fiyat: Düşükten Yükseğe",
+      "price_descending": "Fiyat: Yüksekten Düşüğe",
+      "created_descending": "En Yeniler",
+      "title_ascending": "Alfabetik: A-Z"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Hesap Özeti",
+      "details": "Hesap Detayları",
+      "view_addresses": "Adresleri Yönet ({{ count }})",
+      "return": "Mağazaya Dön",
+      "logout": "Çıkış Yap"
+    },
+    "orders": {
+      "title": "Sipariş Geçmişi",
+      "order_number": "Sipariş {{ name }}",
+      "date": "Tarih",
+      "payment_status": "Ödeme Durumu",
+      "fulfillment_status": "Kargo Durumu",
+      "total": "Toplam",
+      "none": "Henüz verilmiş bir siparişiniz bulunmuyor."
+    },
+    "login": {
+      "title": "Giriş Yap",
+      "email": "E-posta Adresi",
+      "password": "Şifre",
+      "forgot_password": "Şifrenizi mi unuttunuz?",
+      "sign_in": "Giriş Yap",
+      "create_account": "Hesap Oluştur",
+      "guest_title": "Misafir olarak devam et",
+      "guest_continue": "Devam Et"
+    },
+    "register": {
+      "title": "Hesap Oluştur",
+      "first_name": "Ad",
+      "last_name": "Soyad",
+      "email": "E-posta Adresi",
+      "password": "Şifre",
+      "submit": "Hesabı Oluştur",
+      "have_account": "Zaten hesabınız var mı? Giriş yapın"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+<section class="section-spacing">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="text-uppercase text-muted">Patron Portal</span>
+        <h1 class="display-title" style="margin: 0.25rem 0 0;">{{ 'customer.account.title' | t | default: 'Account Overview' }}</h1>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="btn btn-secondary btn-sm">{{ 'customer.account.logout' | t | default: 'Log Out' }}</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; @media (min-width: 990px) { grid-template-columns: 2fr 1fr; }">
+      <!-- Orders List -->
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 1.25rem;">{{ 'customer.orders.title' | t | default: 'Order History' }}</h3>
+        {%- paginate customer.orders by 10 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--color-border); text-align: left;">
+                  <th style="padding: 0.75rem 0.5rem;">Order</th>
+                  <th style="padding: 0.75rem 0.5rem;">Date</th>
+                  <th style="padding: 0.75rem 0.5rem;">Payment</th>
+                  <th style="padding: 0.75rem 0.5rem;">Fulfillment</th>
+                  <th style="padding: 0.75rem 0.5rem;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.75rem 0.5rem; font-weight: 600;"><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                    <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">{{ order.created_at | date: '%b %d, %Y' }}</td>
+                    <td style="padding: 0.75rem 0.5rem;">{{ order.financial_status_label }}</td>
+                    <td style="padding: 0.75rem 0.5rem;">{{ order.fulfillment_status_label }}</td>
+                    <td style="padding: 0.75rem 0.5rem; font-weight: 600;">{{ order.total_net_amount | money_with_currency }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+            {% render 'pagination', paginate: paginate %}
+          {%- else -%}
+            <p style="color: var(--color-text-muted); font-size: 14px;">{{ 'customer.orders.none' | t | default: 'You have not placed any orders yet.' }}</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+
+      <!-- Account Profile & Address Summary -->
+      <div style="background: var(--color-surface); padding: 2rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); height: fit-content;">
+        <h4 style="font-size: 1.125rem; margin-bottom: 1rem;">{{ 'customer.account.details' | t | default: 'Account Details' }}</h4>
+        <div style="font-size: 14px; line-height: 1.7; color: var(--color-text);">
+          <p><strong>{{ customer.name }}</strong></p>
+          <p style="color: var(--color-text-muted);">{{ customer.email }}</p>
+          {%- if customer.default_address -%}
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+              <p>{{ customer.default_address.address1 }}</p>
+              <p>{{ customer.default_address.city }}, {{ customer.default_address.province_code }} {{ customer.default_address.zip }}</p>
+              <p>{{ customer.default_address.country }}</p>
+            </div>
+          {%- endif -%}
+          <div style="margin-top: 1.5rem;">
+            <a href="{{ routes.account_addresses_url }}" class="btn btn-secondary btn-sm btn-full">
+              {{ 'customer.account.view_addresses' | t: count: customer.addresses_count | default: 'Manage Addresses' }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Account",
+  "settings": []
+}
+{% endschema %}

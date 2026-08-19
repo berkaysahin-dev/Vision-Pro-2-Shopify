@@ -1,0 +1,48 @@
+{%- comment -%}
+  ATELIER LUXE — PREDICTIVE SEARCH MODAL SNIPPET
+  Full-Screen Overlay with Trending Suggestions & Live Grouped Results
+{%- endcomment -%}
+
+<div class="search-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t | default: 'Search' }}">
+  <div class="container">
+    <div class="search-modal__header">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+        <span class="search-modal__icon-search">
+          {% render 'icon', icon: 'search' %}
+        </span>
+        <input
+          type="search"
+          name="q"
+          class="search-modal__input"
+          placeholder="{{ 'general.search.placeholder' | t | default: 'What are you looking for?' }}"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+        <button type="button" class="search-modal__close-btn" aria-label="{{ 'general.accessibility.close' | t | default: 'Close Search' }}">
+          {% render 'icon', icon: 'close' %}
+        </button>
+      </form>
+    </div>
+
+    <div class="search-modal__content">
+      <!-- Default Trending Suggestions (when no query entered) -->
+      <div class="search-modal__empty-state">
+        <div>
+          <h4 class="search-modal__section-title">{{ 'general.search.popular_searches' | t | default: 'Trending Searches' }}</h4>
+          <div class="search-modal__trending-pills">
+            <button type="button" class="search-modal__trending-pill">Vision Pro Case</button>
+            <button type="button" class="search-modal__trending-pill">Architectural Lamp</button>
+            <button type="button" class="search-modal__trending-pill">Italian Leather Strap</button>
+            <button type="button" class="search-modal__trending-pill">Minimalist Stand</button>
+            <button type="button" class="search-modal__trending-pill">Titanium Accessories</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Results Container (populated dynamically via JS) -->
+      <div class="search-modal__results"></div>
+    </div>
+  </div>
+</div>

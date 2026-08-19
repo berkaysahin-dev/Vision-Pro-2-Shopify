@@ -1,0 +1,162 @@
+{
+  "general": {
+    "search": {
+      "search": "Search products, stories, collections...",
+      "placeholder": "What are you looking for?",
+      "no_results": "No results found for \"{{ terms }}\"",
+      "results_with_count": {
+        "one": "{{ count }} result found",
+        "other": "{{ count }} results found"
+      },
+      "view_all": "View all {{ count }} results",
+      "popular_searches": "Trending Searches",
+      "suggested_products": "Recommended Pieces",
+      "suggested_collections": "Explore Collections"
+    },
+    "accessibility": {
+      "skip_to_text": "Skip to content",
+      "close": "Close",
+      "open_menu": "Open Menu",
+      "close_menu": "Close Menu",
+      "open_cart": "Open Shopping Bag",
+      "close_cart": "Close Shopping Bag",
+      "previous": "Previous",
+      "next": "Next",
+      "star_rating": "{{ rating }} out of 5 stars"
+    },
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "pagination": {
+      "previous": "Previous Page",
+      "next": "Next Page",
+      "load_more": "Load More Items",
+      "page_count": "Page {{ current }} of {{ total }}"
+    },
+    "newsletter": {
+      "title": "Join the Atelier Society",
+      "subtitle": "Receive private invitations, seasonal previews, and editorial design perspectives.",
+      "placeholder": "Enter your email address",
+      "button": "Subscribe",
+      "success": "Thank you for subscribing. Welcome to Atelier.",
+      "error": "Please enter a valid email address."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Bag",
+      "buy_it_now": "Instant Checkout",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "regular_price": "Regular Price",
+      "sale_price": "Sale Price",
+      "unit_price": "Unit Price",
+      "save_amount": "Save {{ saved_amount }} ({{ saved_percent }}% OFF)",
+      "only_left": "Only {{ count }} units left in stock",
+      "in_stock": "In Stock — Ready to ship",
+      "estimated_delivery": "Order within {{ hours }}h {{ minutes }}m for delivery by {{ date }}",
+      "quick_view": "Quick View",
+      "quick_add": "Quick Add",
+      "choose_options": "Select Options",
+      "size_guide": "Size & Fit Guide",
+      "details": "Product Details",
+      "materials_care": "Materials & Craftsmanship",
+      "shipping_returns": "Complimentary Delivery & Returns",
+      "share": "Share this piece",
+      "added_to_cart": "Added to Bag",
+      "color_swatch": "Color: {{ color }}",
+      "size_selector": "Size",
+      "trust_secure": "Encrypted 256-Bit SSL Checkout",
+      "trust_shipping": "Complimentary Worldwide Express Over $150",
+      "trust_returns": "30-Day Hassle-Free Returns & Exchanges",
+      "trust_warranty": "2-Year Craftsmanship Guarantee"
+    },
+    "wishlist": {
+      "add": "Add to Wishlist",
+      "added": "Saved to Wishlist",
+      "title": "Your Curated Wishlist",
+      "empty": "Your wishlist is currently empty.",
+      "explore": "Explore the Collection"
+    }
+  },
+  "cart": {
+    "title": "Shopping Bag",
+    "empty": "Your shopping bag is empty",
+    "empty_cta": "Discover New Arrivals",
+    "subtotal": "Subtotal",
+    "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping</a> calculated at checkout",
+    "checkout": "Proceed to Secure Checkout",
+    "note": "Add Gift Message or Order Notes",
+    "note_placeholder": "Special instructions or gift note...",
+    "remove": "Remove item",
+    "quantity_decrease": "Decrease quantity",
+    "quantity_increase": "Increase quantity",
+    "upsell_title": "Complete Your Look",
+    "add_upsell": "Add +",
+    "free_shipping": {
+      "progress": "Add {{ amount }} more to unlock Free Express Shipping",
+      "unlocked": "✨ You qualify for Free Worldwide Express Shipping!"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Collections",
+      "filter_by": "Filter & Refine",
+      "sort_by": "Sort by",
+      "clear_all": "Clear All",
+      "items_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      },
+      "no_products": "No products match your selected filters.",
+      "grid_view": "Grid View",
+      "list_view": "List View"
+    },
+    "sorting": {
+      "featured": "Featured Selection",
+      "best_selling": "Best Selling",
+      "price_ascending": "Price: Low to High",
+      "price_descending": "Price: High to Low",
+      "created_descending": "Newest First",
+      "title_ascending": "Alphabetical: A-Z"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Account Overview",
+      "details": "Account Details",
+      "view_addresses": "Manage Addresses ({{ count }})",
+      "return": "Return to Store",
+      "logout": "Log Out"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Order {{ name }}",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "none": "You have not placed any orders yet."
+    },
+    "login": {
+      "title": "Sign In",
+      "email": "Email Address",
+      "password": "Password",
+      "forgot_password": "Forgot password?",
+      "sign_in": "Sign In",
+      "create_account": "Create an Account",
+      "guest_title": "Continue as a guest",
+      "guest_continue": "Continue"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Create Account",
+      "have_account": "Already have an account? Sign in"
+    }
+  }
+}

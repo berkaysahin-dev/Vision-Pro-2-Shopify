@@ -1,0 +1,43 @@
+{%- paginate blog.articles by 6 -%}
+
+<section class="section-spacing">
+  <div class="container">
+    <div style="margin-bottom: var(--space-2xl); text-align: center;">
+      <span class="text-uppercase text-muted">Editorial Perspectives</span>
+      <h1 class="display-title" style="margin: 0.25rem 0 0.5rem;">{{ blog.title | default: 'The Atelier Journal' }}</h1>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+      {%- for article in blog.articles -%}
+        <article style="display: flex; flex-direction: column; gap: 1rem;">
+          {%- if article.image -%}
+            <a href="{{ article.url }}" style="border-radius: var(--border-radius); overflow: hidden; aspect-ratio: 16/10; background: var(--color-surface); display: block;">
+              <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title | escape }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+            </a>
+          {%- endif -%}
+          <div>
+            <span class="text-uppercase text-muted" style="font-size: 11px;">{{ article.published_at | date: '%B %d, %Y' }}</span>
+            <h2 class="h3" style="margin: 0.25rem 0 0.5rem;">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h2>
+            <p style="color: var(--color-text-muted); font-size: 14px; line-height: 1.6;">
+              {{ article.excerpt_or_content | strip_html | truncatewords: 24 }}
+            </p>
+            <a href="{{ article.url }}" style="font-size: 13px; font-weight: 600; text-decoration: underline; margin-top: 0.5rem; display: inline-block;">Read Monograph →</a>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {% render 'pagination', paginate: paginate %}
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog Journal",
+  "settings": []
+}
+{% endschema %}

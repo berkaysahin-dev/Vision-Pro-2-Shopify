@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
+  <meta name="theme-color" content="{{ settings.color_primary | default: '#0F1115' }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% render 'structured-data' %}
+
+  <!-- Stylesheets -->
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'component-header.css' | asset_url | stylesheet_tag }}
+  {{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+  {{ 'component-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'component-search.css' | asset_url | stylesheet_tag }}
+  {{ 'component-sections.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    window.themeSettings = {
+      freeShippingThreshold: {{ settings.cart_free_shipping_threshold | default: 150 | json }},
+      freeShippingMsg: {{ settings.cart_free_shipping_message | json }},
+      freeShippingUnlockedMsg: {{ settings.cart_free_shipping_unlocked_message | json }}
+    };
+  </script>
+
+  {{ content_for_header }}
+</head>
+
+<body class="template-{{ template.name | handle }}">
+  <a class="visually-hidden" href="#MainContent">
+    {{ 'general.accessibility.skip_to_text' | t | default: 'Skip to content' }}
+  </a>
+
+  <!-- Top Ambient Scroll Progress Bar -->
+  <div class="scroll-progress-bar"></div>
+
+
+
+
+  <!-- Announcement Bar Group -->
+  {% sections 'announcement-bar-group' %}
+
+  <!-- Header Group -->
+  {% sections 'header-group' %}
+
+  {% render 'breadcrumb' %}
+
+  <!-- Main Layout Content -->
+  <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer Group -->
+  {% sections 'footer-group' %}
+
+  <!-- Global Drawers & Modals -->
+  {% render 'cart-drawer' %}
+  {% render 'predictive-search-modal' %}
+  {% render 'quick-view-modal' %}
+  {% render 'size-guide-modal' %}
+
+  <!-- Backdrop Overlay -->
+  <div class="backdrop-overlay"></div>
+
+  <!-- Core JavaScript & Motion Engines -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'motion.js' | asset_url }}" defer></script>
+
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+  <script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer></script>
+  <script src="{{ 'wishlist.js' | asset_url }}" defer></script>
+  <script src="{{ 'quick-view.js' | asset_url }}" defer></script>
+</body>
+</html>

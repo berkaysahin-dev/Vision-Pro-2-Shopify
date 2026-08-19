@@ -1,0 +1,43 @@
+{
+  "name": "Footer Group",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand_text": "Meticulously engineered essentials for modern life. Guided by the principles of architectural restraint, pure materials, and timeless durability."
+      },
+      "blocks": {
+        "col_1": {
+          "type": "link_list",
+          "settings": {
+            "title": "Collections",
+            "menu": "main-menu"
+          }
+        },
+        "col_2": {
+          "type": "link_list",
+          "settings": {
+            "title": "Customer Care",
+            "menu": "footer"
+          }
+        },
+        "newsletter_block": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Private Dispatch",
+            "subtext": "Receive seasonal previews, editorial lookbooks, and private gallery invites."
+          }
+        }
+      },
+      "block_order": [
+        "col_1",
+        "col_2",
+        "newsletter_block"
+      ]
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

@@ -1,0 +1,138 @@
+<section class="section-spacing">
+  <div class="container-narrow">
+    <div style="margin-bottom: var(--space-lg); text-align: center;" data-reveal="fade-up">
+      <h1 class="display-title">{{ page.title | default: 'About Vision SH' }}</h1>
+    </div>
+
+    {%- if page.content != blank -%}
+      <div style="font-size: 1.0625rem; line-height: 1.8; color: var(--color-text);" data-reveal="fade-up">
+        {{ page.content }}
+      </div>
+    {%- endif -%}
+
+    {%- assign page_handle_lower = page.handle | downcase -%}
+
+    {%- comment -%}
+      Auto-detect About page and render luxury editorial brand story
+    {%- endcomment -%}
+    {%- if page_handle_lower contains 'about' or page_handle_lower contains 'hakkimizda' or page_handle_lower contains 'hikayemiz' or page_handle_lower contains 'story' -%}
+      <div style="margin-top: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-2xl);">
+        <!-- Hero Editorial Quote -->
+        <div style="background: var(--color-surface); padding: clamp(2rem, 5vw, 4rem); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border); text-align: center;" data-reveal="fade-up">
+          <span class="text-uppercase text-accent" style="letter-spacing: 0.15em; font-weight: 700;">Design Manifesto</span>
+          <p style="font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem); line-height: 1.5; font-style: italic; color: var(--color-text); margin: 1.5rem auto; max-width: 720px;">
+            "We engineer spatial objects that eliminate superficial noise &mdash; elevating digital computing into a tactile, sculptural ritual."
+          </p>
+          <span style="font-size: 13px; color: var(--color-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Vision SH Studio &mdash; Milan / Tokyo</span>
+        </div>
+
+        <!-- Editorial Split -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;" data-reveal="fade-up">
+          <div style="border-radius: var(--border-radius-lg); overflow: hidden; aspect-ratio: 4/5; background: #16181F; display: flex; align-items: center; justify-content: center; color: #475569; padding: 2rem;">
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <span class="section-subtitle">Architectural Heritage</span>
+            <h2 class="h2">Formed at the Intersection of Architecture and Metallurgy</h2>
+            <p style="color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.8;">
+              Founded with a commitment to pure materials and micro-tolerances, Vision SH designs spatial accessories and pedestals that treat spatial computing hardware with the reverence of classical sculpture.
+            </p>
+            <p style="color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.8;">
+              Every curve, bevel, and magnetic coupling point is machined from solid billet Grade 5 titanium, hand-buffed in limited numbered editions.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Pillars Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;" data-reveal="fade-up">
+          <div style="background: var(--color-surface); padding: 2.25rem 2rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 1rem;">
+            <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-secondary);">01</span>
+            <h3 style="font-size: 1.25rem;">Grade 5 Titanium</h3>
+            <p style="color: var(--color-text-muted); font-size: 14px; line-height: 1.7;">
+              Aerospace-grade Ti-6Al-4V alloy, offering unyielding structural strength, hypoallergenic contact, and timeless resilience.
+            </p>
+          </div>
+          <div style="background: var(--color-surface); padding: 2.25rem 2rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 1rem;">
+            <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-secondary);">02</span>
+            <h3 style="font-size: 1.25rem;">0.02mm Tolerances</h3>
+            <p style="color: var(--color-text-muted); font-size: 14px; line-height: 1.7;">
+              Multi-axis high-speed CNC milling ensures microscopic precision across every seamless joint, seam, and magnetic socket.
+            </p>
+          </div>
+          <div style="background: var(--color-surface); padding: 2.25rem 2rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 1rem;">
+            <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-secondary);">03</span>
+            <h3 style="font-size: 1.25rem;">Hand-Buffed Satin</h3>
+            <p style="color: var(--color-text-muted); font-size: 14px; line-height: 1.7;">
+              Each finished object is hand-buffed and satin-anodized by master craftsmen in Milan, creating an ambient matte luster.
+            </p>
+          </div>
+        </div>
+
+        <!-- CTA Box -->
+        <div style="background: #0B0C10; color: #FFFFFF; padding: clamp(2.5rem, 5vw, 4.5rem); border-radius: var(--border-radius-lg); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;" data-reveal="fade-up">
+          <h2 class="h2" style="color: #FFFFFF;">Experience the Vision SH Collection</h2>
+          <p style="color: #94A3B8; font-size: 1.0625rem; max-width: 560px; line-height: 1.7;">
+            Explore our curated range of precision pedestals, spatial computing accessories, and monolithic desk editions.
+          </p>
+          <a href="/collections/all" class="btn btn-white btn-lg">
+            Discover Series 02 →
+          </a>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}
+      Auto-detect contact pages by handle and show contact form
+    {%- endcomment -%}
+    {%- if page_handle_lower contains 'contact' or page_handle_lower contains 'iletisim' or page_handle_lower contains 'bize-ulasin' -%}
+      <div style="margin-top: var(--space-xl);" data-reveal="fade-up">
+        <div style="background: var(--color-surface); padding: clamp(2rem, 4vw, 3.5rem); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border);">
+          {% form 'contact' %}
+            {%- if form.posted_successfully? -%}
+              <div style="color: var(--color-stock-success); font-weight: 600; font-size: 1.125rem; text-align: center; padding: 2rem 0;">
+                Thank you for your message. A concierge associate will respond within 24 hours.
+              </div>
+            {%- else -%}
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div class="form-group">
+                  <label class="form-label" for="ContactFormName">Name</label>
+                  <input type="text" name="contact[name]" id="ContactFormName" class="form-input" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ContactFormEmail">Email Address</label>
+                  <input type="email" name="contact[email]" id="ContactFormEmail" class="form-input" placeholder="email@domain.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="ContactFormInquiry">Inquiry Nature</label>
+                <select name="contact[inquiry_type]" id="ContactFormInquiry" class="form-select">
+                  <option value="General Inquiry">General Patron Concierge</option>
+                  <option value="Order & Logistics">Order & Global Logistics</option>
+                  <option value="Product Question">Bespoke Architectural Commission</option>
+                  <option value="Press & Media">Press & Editorial Dispatch</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="ContactFormMessage">Message</label>
+                <textarea name="contact[body]" id="ContactFormMessage" rows="5" class="form-textarea" placeholder="How may our concierge assist you?" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 1rem;">
+                Transmit Inquiry
+              </button>
+            {%- endif -%}
+          {% endform %}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "settings": []
+}
+{% endschema %}

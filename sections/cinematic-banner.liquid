@@ -1,0 +1,133 @@
+<section class="cinematic-banner-section" style="min-height: {{ section.settings.height }}vh;">
+  <!-- Full-Bleed Media with Parallax -->
+  <div class="cinematic-banner-media">
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 2400 }}"
+        alt="{{ section.settings.heading | escape }}"
+        data-parallax="true"
+        data-parallax-speed="0.15"
+        loading="lazy"
+      >
+    {%- else -%}
+      <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #0B0C10 0%, #161922 100%); display: flex; align-items: center; justify-content: center; color: #334155;">
+        <div style="width: 70%; height: 70%; opacity: 0.12;">
+          {{ 'lifestyle-2' | placeholder_svg_tag }}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Ambient Overlay -->
+  <div class="cinematic-banner-overlay" style="background: rgba(11, 12, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+
+  <!-- Editorial Content -->
+  <div class="container" style="position: relative; z-index: 3;">
+    <div class="cinematic-banner-content" data-reveal="fade-up">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="badge" style="background: rgba(255,255,255,0.15); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.3);">
+          {{ section.settings.eyebrow }}
+        </span>
+      {%- endif -%}
+
+      <h2 class="display-title" style="color: #FFFFFF; font-size: clamp(2.5rem, 2rem + 3vw, 4.75rem);">
+        {{ section.settings.heading | default: 'Pure Materiality. Zero Compromise.' }}
+      </h2>
+
+      <p style="color: rgba(255, 255, 255, 0.88); font-size: 1.125rem; line-height: 1.7; max-width: 620px;">
+        {{ section.settings.subheading | default: 'Every piece is manufactured under ISO-certified microscopic tolerances, creating objects that endure across decades of daily use.' }}
+      </p>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem;">
+        {%- if section.settings.cta_1_text != blank -%}
+          <a href="{{ section.settings.cta_1_url | default: '/collections/all' }}" class="btn btn-white btn-lg">
+            {{ section.settings.cta_1_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta_2_text != blank -%}
+          <a href="{{ section.settings.cta_2_url | default: '/pages/about' }}" class="btn btn-secondary btn-lg" style="color: #FFFFFF; border-color: rgba(255,255,255,0.35);">
+            {{ section.settings.cta_2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinematic Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Full Bleed Image"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section Height",
+      "default": 75
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Darkness",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Pill",
+      "default": "THE MONOLITH PHILOSOPHY"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Pure Materiality. Zero Compromise."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every piece is manufactured under ISO-certified microscopic tolerances, creating objects that endure across decades of daily use."
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "Primary CTA",
+      "default": "Explore the Collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_url",
+      "label": "Primary Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "Secondary CTA",
+      "default": "Read the Manifesto"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_url",
+      "label": "Secondary Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinematic Banner"
+    }
+  ]
+}
+{% endschema %}

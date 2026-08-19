@@ -1,0 +1,84 @@
+<section class="section-spacing" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="section-header text-center" data-reveal="fade-up">
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.title | default: 'Living with Vision SH' }}</h2>
+      <p style="color: var(--color-text-muted); font-size: 14px; margin-top: 0.25rem;">
+        Follow <a href="{{ settings.social_instagram_link | default: 'https://instagram.com' }}" target="_blank" style="text-decoration: underline; color: var(--color-text);">@vision.sh</a> on Instagram
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem;" data-reveal="fade-up">
+      <!-- Grid items with high-res lifestyle fallbacks -->
+      <div style="position: relative; border-radius: var(--border-radius); overflow: hidden; aspect-ratio: 1/1; background-color: var(--color-surface);">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop" alt="Vision SH Lifestyle 01" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="position: relative; border-radius: var(--border-radius); overflow: hidden; aspect-ratio: 1/1; background-color: var(--color-surface);">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600&auto=format&fit=crop" alt="Vision SH Lifestyle 02" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="position: relative; border-radius: var(--border-radius); overflow: hidden; aspect-ratio: 1/1; background-color: var(--color-surface);">
+        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=600&auto=format&fit=crop" alt="Vision SH Lifestyle 03" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="position: relative; border-radius: var(--border-radius); overflow: hidden; aspect-ratio: 1/1; background-color: var(--color-surface);">
+        <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?q=80&w=600&auto=format&fit=crop" alt="Vision SH Lifestyle 04" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social / Lookbook Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Community & Curation"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Living with Vision SH"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_post",
+      "name": "Social Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Lifestyle Photo"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Alt Caption",
+          "default": "Minimalist spatial setup"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Tagged Shoppable Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social / Lookbook Grid"
+    }
+  ]
+}
+{% endschema %}

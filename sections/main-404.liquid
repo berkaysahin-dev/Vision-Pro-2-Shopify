@@ -1,0 +1,20 @@
+<section class="section-spacing" style="min-height: 60vh; display: flex; align-items: center;">
+  <div class="container-narrow" style="text-align: center; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+    <span class="text-uppercase text-muted">Error 404</span>
+    <h1 class="display-title">Dimension Not Found</h1>
+    <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 480px;">
+      The architectural artifact or link you are seeking has either been relocated or no longer exists in our catalog.
+    </p>
+    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+      <a href="{{ routes.root_url }}" class="btn btn-primary">Return to Flagship</a>
+      <a href="/collections/all" class="btn btn-secondary">Discover Catalog</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": []
+}
+{% endschema %}

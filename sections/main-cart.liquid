@@ -1,0 +1,71 @@
+<section class="section-spacing">
+  <div class="container-narrow">
+    <div style="margin-bottom: 2.5rem; text-align: center;">
+      <h1 class="display-title">{{ 'cart.title' | t | default: 'Your Shopping Bag' }}</h1>
+    </div>
+
+    {%- if cart.item_count == 0 -%}
+      <div style="text-align: center; padding: 4rem 1rem;">
+        <p style="font-size: 1.125rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+          {{ 'cart.empty' | t | default: 'Your shopping bag is currently empty.' }}
+        </p>
+        <a href="/collections/all" class="btn btn-primary">
+          {{ 'cart.empty_cta' | t | default: 'Explore New Arrivals' }}
+        </a>
+      </div>
+    {%- else -%}
+      <form action="/cart" method="post" id="cart">
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+          {%- for item in cart.items -%}
+            <div style="display: flex; gap: 1.5rem; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
+              <div style="width: 100px; height: 120px; border-radius: var(--border-radius-sm); overflow: hidden; background: var(--color-surface); flex-shrink: 0;">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                {%- endif -%}
+              </div>
+              <div style="flex-grow: 1;">
+                <h3 style="font-size: 1.125rem; font-weight: 600;">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h3>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div style="font-size: 13px; color: var(--color-text-muted); margin-top: 0.25rem;">{{ item.variant.title }}</div>
+                {%- endunless -%}
+                <div style="font-weight: 600; font-size: 14px; margin-top: 0.5rem;">{{ item.final_line_price | money }}</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <input
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  class="form-input"
+                  style="width: 60px; text-align: center; height: 40px;"
+                >
+                <a href="/cart/change?line={{ forloop.index }}&quantity=0" style="font-size: 13px; color: var(--color-text-muted); text-decoration: underline;">Remove</a>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; flex-wrap: wrap; gap: 1.5rem;">
+          <button type="submit" name="update" class="btn btn-secondary btn-sm">Update Bag</button>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
+            <div style="font-size: 1.25rem; font-weight: 700;">
+              <span>Subtotal: </span><span>{{ cart.total_price | money }}</span>
+            </div>
+            <button type="submit" name="checkout" class="btn btn-primary btn-lg">
+              {{ 'cart.checkout' | t | default: 'Proceed to Secure Checkout' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}

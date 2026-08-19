@@ -1,0 +1,123 @@
+<section class="section-spacing" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="section-header text-center" data-reveal="fade-up">
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.title | default: 'Interactive Spatial Environment' }}</h2>
+    </div>
+
+    <div class="hotspot-container" data-reveal="fade-up">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.title | escape }}" loading="lazy" style="width: 100%; height: auto; display: block;">
+      {%- else -%}
+        <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1600&auto=format&fit=crop" alt="Vision SH Living Lookbook" loading="lazy" style="width: 100%; height: auto; display: block; aspect-ratio: 16/9; object-fit: cover;">
+      {%- endif -%}
+
+      <!-- Hotspot Points -->
+      {%- for block in section.blocks -%}
+        {%- assign hotspot_product = all_products[block.settings.product] -%}
+        <div class="hotspot-point" style="top: {{ block.settings.pos_y }}%; left: {{ block.settings.pos_x }}%;" {{ block.shopify_attributes }}>
+          <span>+</span>
+
+          <div class="hotspot-tooltip">
+            <div style="font-weight: 600; font-size: 13px; margin-bottom: 0.25rem;">
+              {{ hotspot_product.title | default: block.settings.title | default: 'Titanium Spatial Stand' }}
+            </div>
+            <div style="font-size: 12px; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+              {{ hotspot_product.price | money | default: '$240.00' }}
+            </div>
+            <a href="{{ hotspot_product.url | default: '/collections/all' }}" class="btn btn-primary btn-sm btn-full" style="padding: 0.35rem 0.5rem; font-size: 11px;">
+              View Piece →
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shoppable Hotspots",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Scene Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Interactive Lookbook"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Interactive Spatial Environment"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product Hotspot",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Tagged Product"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Fallback Title",
+          "default": "Titanium Spatial Stand"
+        },
+        {
+          "type": "range",
+          "id": "pos_x",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal Position (X)",
+          "default": 35
+        },
+        {
+          "type": "range",
+          "id": "pos_y",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical Position (Y)",
+          "default": 45
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable Hotspots",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": { "title": "Titanium Spatial Pedestal", "pos_x": 32, "pos_y": 48 }
+        },
+        {
+          "type": "hotspot",
+          "settings": { "title": "Calfskin Magnetic Travel Shield", "pos_x": 68, "pos_y": 38 }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

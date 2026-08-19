@@ -1,0 +1,69 @@
+{%- paginate search.results by 12 -%}
+
+<section class="section-spacing">
+  <div class="container">
+    <div style="margin-bottom: var(--space-xl); text-align: center;">
+      <h1 class="display-title">{{ 'general.search.search' | t | default: 'Search' }}</h1>
+      {%- if search.performed -%}
+        <p style="color: var(--color-text-muted); font-size: 1.125rem; margin-top: 0.5rem;">
+          {{ 'general.search.results_with_count' | t: count: search.results_count }} for "<strong>{{ search.terms | escape }}</strong>"
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Search Bar -->
+    <div style="max-width: 540px; margin: 0 auto 3rem;">
+      <form action="{{ routes.search_url }}" method="get" role="search" style="display: flex; gap: 0.5rem;">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.placeholder' | t | default: 'What are you looking for?' }}"
+          class="form-input"
+          style="height: 48px;"
+        >
+        <button type="submit" class="btn btn-primary" style="height: 48px; min-width: 120px;">Search</button>
+      </form>
+    </div>
+
+    <!-- Results Grid -->
+    {%- if search.performed -%}
+      {%- if search.results_count == 0 -%}
+        <div style="text-align: center; padding: 3rem 1rem;">
+          <p style="font-size: 1.125rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+            {{ 'general.search.no_results' | t: terms: search.terms }}
+          </p>
+          <a href="/collections/all" class="btn btn-secondary btn-sm">Explore All Creations</a>
+        </div>
+      {%- else -%}
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(230px, 20vw, 300px), 1fr)); gap: clamp(1rem, 2.5vw, 2.5rem);">
+          {%- for item in search.results -%}
+            {%- case item.object_type -%}
+              {%- when 'product' -%}
+                {% render 'product-card', card_product: item %}
+              {%- else -%}
+                <div class="product-card" style="padding: 1.5rem; background: var(--color-surface); border-radius: var(--border-radius);">
+                  <span class="text-uppercase text-muted">{{ item.object_type }}</span>
+                  <h3 style="font-size: 1.125rem; margin: 0.5rem 0;">
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                  </h3>
+                  <p style="font-size: 13px; color: var(--color-text-muted);">{{ item.content | strip_html | truncatewords: 20 }}</p>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+
+        {% render 'pagination', paginate: paginate %}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Search Results",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,304 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign is_on_sale = false
+  if current_variant.compare_at_price > current_variant.price
+    assign is_on_sale = true
+    assign discount_percent = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price
+  endif
+-%}
+
+<section class="product-section" data-section-id="{{ section.id }}" data-product-id="{{ product.id }}">
+  <div class="container">
+    <div class="product-grid">
+      <!-- Media Gallery (Left Side) -->
+      <div class="product-gallery">
+        <!-- Thumbnails -->
+        {%- if product.media.size > 1 -%}
+          <div class="product-gallery__thumbnails">
+            {%- for media in product.media -%}
+              <div
+                class="product-gallery__thumb-item {% if forloop.first %}is-active{% endif %}"
+                data-media-id="{{ media.id }}"
+                data-media-src="{{ media | image_url: width: 1400 }}"
+              >
+                <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" loading="lazy" width="72" height="96">
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Main Media Preview -->
+        <div class="product-gallery__main">
+          <div class="product-gallery__main-image-wrap">
+            {%- if product.featured_media -%}
+              <img
+                src="{{ product.featured_media | image_url: width: 1400 }}"
+                alt="{{ product.featured_media.alt | escape | default: product.title }}"
+                class="product-gallery__main-image"
+                loading="eager"
+                width="1400"
+                height="1866"
+              >
+            {%- else -%}
+              <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--color-surface); color: var(--color-text-muted); min-height: 480px;">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Information & Purchase Form (Right Side) -->
+      <div class="product-info">
+        <!-- Vendor & Title -->
+        <div>
+          <div class="product-info__vendor">{{ product.vendor | default: shop.name | default: 'VISION SH' }}</div>
+          <h1 class="product-info__title">{{ product.title | default: 'Spatial Titanium Pedestal Edition 01' }}</h1>
+        </div>
+
+        <!-- Rating & Social Proof -->
+        <div class="product-info__rating">
+          <div style="display: flex; gap: 2px; color: #F59E0B;">
+            {%- for star in (1..5) -%}
+              {% render 'icon', icon: 'star' %}
+            {%- endfor -%}
+          </div>
+          <span style="font-weight: 700; font-size: 13px; color: var(--color-text);">4.98</span>
+          <span class="product-info__rating-count">(64 Verified Patron Reviews)</span>
+        </div>
+
+        <!-- Price Block -->
+        <div class="product-info__price-block">
+          <span class="product-info__price">{{ current_variant.price | default: 24000 | money }}</span>
+          <span class="product-info__price--compare" style="{% unless is_on_sale %}display: none;{% endunless %}">
+            {{ current_variant.compare_at_price | money }}
+          </span>
+          {%- if is_on_sale -%}
+            <span class="product-info__savings-badge">-{{ discount_percent }}% OFF</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Free Worldwide Express Banner -->
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--border-radius); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 12px; color: #065F46; font-weight: 500;">
+          <span>✨</span>
+          <span><strong>Complimentary Worldwide Express</strong> unlocked for this piece (DHL Priority).</span>
+        </div>
+
+        <!-- Scarcity Stock Indicator -->
+        {%- if settings.pdp_enable_live_stock -%}
+          <div class="product-stock-urgency">
+            <div class="product-stock-urgency__header">
+              <span class="product-stock-urgency__pulse"></span>
+              <span>⚡ {{ 'products.product.only_left' | t: count: 4 | default: 'Only 4 units remaining in current numbered production batch' }}</span>
+            </div>
+            <div class="product-stock-urgency__bar">
+              <div class="product-stock-urgency__bar-fill" style="width: 25%;"></div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- Real-Time Delivery Estimator -->
+        {%- if settings.pdp_enable_delivery_estimator -%}
+          <div class="product-delivery-estimator" data-delivery-timer>
+            {% render 'icon', icon: 'clock' %}
+            <div>
+              <span>Order within </span>
+              <strong class="countdown-time" style="color: var(--color-primary);">02h 35m 18s</strong>
+              <span> for dispatch by <strong>Tomorrow Morning</strong></span>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- Product Purchase Form -->
+        {% form 'product', product, id: 'MainProductForm', class: 'product-form' %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+          <!-- Variant Option Selectors -->
+          {%- unless product.has_only_default_variant -%}
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
+              {%- for option in product.options_with_values -%}
+                {%- assign downcase_name = option.name | downcase -%}
+                {%- assign is_color = false -%}
+                {%- if downcase_name == 'color' or downcase_name == 'colour' or downcase_name == 'renk' -%}
+                  {%- assign is_color = true -%}
+                {%- endif -%}
+
+                <div class="product-option-group">
+                  <div class="product-option-header">
+                    <span class="product-option-label">
+                      {{ option.name }}: <span class="product-option-selected-val text-muted" style="font-weight: 500;">{{ option.selected_value }}</span>
+                    </span>
+                    {%- if downcase_name == 'size' or downcase_name == 'beden' -%}
+                      <button type="button" class="product-option-size-guide" data-open-size-guide>
+                        {{ 'products.product.size_guide' | t | default: 'Size & Fit Guide' }}
+                      </button>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="product-option-values">
+                    {%- for value in option.values -%}
+                      {%- if is_color -%}
+                        {%- assign color_code = value | downcase | replace: ' ', '' -%}
+                        <button
+                          type="button"
+                          class="product-pdp-swatch {% if option.selected_value == value %}is-selected{% endif %}"
+                          style="background-color: {{ color_code }};"
+                          data-value="{{ value | escape }}"
+                          title="{{ value }}"
+                          aria-label="{{ value }}"
+                        ></button>
+                      {%- else -%}
+                        <button
+                          type="button"
+                          class="product-option-btn {% if option.selected_value == value %}is-selected{% endif %}"
+                          data-value="{{ value | escape }}"
+                        >
+                          {{ value }}
+                        </button>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <!-- Quantity & Action Buttons -->
+          <div class="product-actions-row">
+            <div class="quantity-stepper">
+              <button type="button" class="quantity-stepper__btn" onclick="const input = this.nextElementSibling; if(input.value > 1) input.value--;">-</button>
+              <input type="number" name="quantity" value="1" min="1" class="quantity-stepper__input" aria-label="Quantity">
+              <button type="button" class="quantity-stepper__btn" onclick="const input = this.previousElementSibling; input.value++;">+</button>
+            </div>
+
+            <button
+              type="submit"
+              name="add"
+              class="btn btn-primary product-atc-btn"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {{ 'products.product.add_to_cart' | t | default: 'Add to Bag' }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t | default: 'Sold Out' }}
+              {%- endif -%}
+            </button>
+
+            <!-- Wishlist Button -->
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-wishlist-btn
+              data-product-handle="{{ product.handle }}"
+              style="width: 50px; padding: 0;"
+              aria-label="{{ 'products.wishlist.add' | t | default: 'Add to Wishlist' }}"
+            >
+              {% render 'icon', icon: 'heart' %}
+            </button>
+          </div>
+
+          <!-- Dynamic Checkout Button -->
+          <div style="margin-top: 0.75rem;">
+            {{ form | payment_button }}
+          </div>
+        {% endform %}
+
+        <!-- Trust Signals Row -->
+        {%- if settings.pdp_enable_trust_badges -%}
+          <div class="product-trust-badges">
+            <div class="product-trust-item">
+              {% render 'icon', icon: 'shield-check' %}
+              <span>{{ 'products.product.trust_secure' | t | default: '256-Bit SSL Encrypted' }}</span>
+            </div>
+            <div class="product-trust-item">
+              {% render 'icon', icon: 'truck' %}
+              <span>{{ 'products.product.trust_shipping' | t | default: 'Worldwide DHL Express' }}</span>
+            </div>
+            <div class="product-trust-item">
+              {% render 'icon', icon: 'rotate-ccw' %}
+              <span>{{ 'products.product.trust_returns' | t | default: '30-Day Returns' }}</span>
+            </div>
+            <div class="product-trust-item">
+              {% render 'icon', icon: 'award' %}
+              <span>{{ 'products.product.trust_warranty' | t | default: '2-Year Warranty' }}</span>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- Information Accordions -->
+        <div class="product-accordions" data-accordion-type="multiple">
+          <!-- Description / Details -->
+          <div class="product-accordion-item is-open">
+            <div class="product-accordion-header">
+              <span>{{ 'products.product.details' | t | default: 'Architectural Details & Specifications' }}</span>
+              <span class="product-accordion-icon">{% render 'icon', icon: 'chevron-down' %}</span>
+            </div>
+            <div class="product-accordion-body">
+              {%- if product.description != blank -%}
+                {{ product.description }}
+              {%- else -%}
+                <p>Machined from monolithic aerospace Grade 5 titanium billet with 0.02mm microscopic tolerances. Features integrated acoustic isolation silicone pads and magnetic coupling alignment.</p>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <!-- Materials & Care -->
+          <div class="product-accordion-item">
+            <div class="product-accordion-header">
+              <span>{{ 'products.product.materials_care' | t | default: 'Metallurgy & Care Instructions' }}</span>
+              <span class="product-accordion-icon">{% render 'icon', icon: 'chevron-down' %}</span>
+            </div>
+            <div class="product-accordion-body">
+              <p>Machined from single-billet Grade 5 Ti-6Al-4V titanium. Anodized and hand-buffed for ultra-refined micro-textures. To maintain luster, wipe gently with a microfiber cloth. Avoid abrasive chemical solvents.</p>
+            </div>
+          </div>
+
+          <!-- Shipping & Returns -->
+          <div class="product-accordion-item">
+            <div class="product-accordion-header">
+              <span>{{ 'products.product.shipping_returns' | t | default: 'Complimentary Express Delivery & Returns' }}</span>
+              <span class="product-accordion-icon">{% render 'icon', icon: 'chevron-down' %}</span>
+            </div>
+            <div class="product-accordion-body">
+              <p>All orders are dispatched within 24 hours via DHL Express Priority. We offer complimentary global shipping on orders over $150. Returns are accepted within 30 days of delivery with prepaid return labels.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Add to Cart Bar -->
+  {%- if settings.pdp_enable_sticky_atc -%}
+    <div class="sticky-atc-bar" aria-hidden="true">
+      <div class="container sticky-atc-bar__container">
+        <div class="sticky-atc-bar__product">
+          {%- if product.featured_media -%}
+            <img src="{{ product.featured_media | image_url: width: 90 }}" alt="{{ product.title }}" class="sticky-atc-bar__thumb" loading="lazy">
+          {%- endif -%}
+          <div>
+            <div class="sticky-atc-bar__title">{{ product.title | default: 'Vision Pro Spatial Pedestal' }}</div>
+            <div class="sticky-atc-bar__price text-muted">{{ current_variant.price | default: 24000 | money }}</div>
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary btn-sm sticky-atc-btn" onclick="document.querySelector('.product-atc-btn').click();">
+            {{ 'products.product.add_to_cart' | t | default: 'Add to Bag' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+<!-- Inject Product JSON for dynamic JS variant handler -->
+<script>
+  window.productVariants = {{ product.variants | json }};
+</script>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": []
+}
+{% endschema %}

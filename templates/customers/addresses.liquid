@@ -1,0 +1,67 @@
+<section class="section-spacing">
+  <div class="container-narrow">
+    <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <a href="{{ routes.account_url }}" style="font-size: 13px; color: var(--color-text-muted);">← Return to Account Overview</a>
+        <h1 class="display-title" style="margin-top: 0.5rem;">Manage Addresses</h1>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('AddAddress').style.display = document.getElementById('AddAddress').style.display === 'none' ? 'block' : 'none';">
+        + Add New Address
+      </button>
+    </div>
+
+    <!-- Add New Address Form Container -->
+    <div id="AddAddress" style="display: none; background: var(--color-surface); padding: 2rem; border-radius: var(--border-radius-lg); border: 1px solid var(--color-border); margin-bottom: 2rem;">
+      <h3 style="margin-bottom: 1.25rem;">New Patron Address</h3>
+      {% form 'customer_address', customer.new_address %}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="AddressFirstNameNew">First Name</label>
+            <input type="text" id="AddressFirstNameNew" name="address[first_name]" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="AddressLastNameNew">Last Name</label>
+            <input type="text" id="AddressLastNameNew" name="address[last_name]" class="form-input" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="AddressAddress1New">Street Address</label>
+          <input type="text" id="AddressAddress1New" name="address[address1]" class="form-input" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="AddressCityNew">City</label>
+            <input type="text" id="AddressCityNew" name="address[city]" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="AddressZipNew">Postal / ZIP Code</label>
+            <input type="text" id="AddressZipNew" name="address[zip]" class="form-input" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save Address</button>
+      {% endform %}
+    </div>
+
+    <!-- Address Cards List -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      {%- for address in customer.addresses -%}
+        <div style="background: var(--color-surface); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); font-size: 14px; position: relative;">
+          {%- if address == customer.default_address -%}
+            <span class="badge badge-new" style="margin-bottom: 0.75rem;">Default</span>
+          {%- endif -%}
+          <p><strong>{{ address.first_name }} {{ address.last_name }}</strong></p>
+          <p>{{ address.address1 }}</p>
+          <p>{{ address.city }}, {{ address.zip }}</p>
+          <p>{{ address.country }}</p>
+
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); display: flex; gap: 1rem;">
+            <form method="post" action="/account/addresses/{{ address.id }}">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" style="font-size: 12px; color: var(--color-sale); cursor: pointer; text-decoration: underline;">Delete</button>
+            </form>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

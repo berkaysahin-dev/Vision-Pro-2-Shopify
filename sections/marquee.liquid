@@ -1,0 +1,83 @@
+<section class="marquee-ticker" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="marquee-ticker__track" style="animation-direction: {{ section.settings.direction }}; animation-duration: {{ section.settings.speed }}s;">
+    {%- for i in (1..3) -%}
+      {%- for block in section.blocks -%}
+        <div class="marquee-ticker__item" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.text }}</span>
+          <span class="marquee-ticker__dot">{{ section.settings.divider | default: '✦' }}</span>
+        </div>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee Statement",
+  "settings": [
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Scroll Direction",
+      "options": [
+        { "value": "normal", "label": "Left to Right" },
+        { "value": "reverse", "label": "Right to Left" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "s",
+      "label": "Animation Duration (Speed)",
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "divider",
+      "label": "Divider Symbol",
+      "default": "✦"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#0F1115"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_item",
+      "name": "Statement Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Brand Statement",
+          "default": "VISION SH — FORM / FUNCTION / FUTURE"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Statement",
+      "blocks": [
+        { "type": "marquee_item", "settings": { "text": "VISION SH — FORM / FUNCTION / FUTURE" } },
+        { "type": "marquee_item", "settings": { "text": "AEROSPACE GRADE 5 TITANIUM BILLET" } },
+        { "type": "marquee_item", "settings": { "text": "COMPLIMENTARY WORLDWIDE EXPRESS DISPATCH" } },
+        { "type": "marquee_item", "settings": { "text": "LIMITED 500-UNIT GLOBAL PRODUCTION" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

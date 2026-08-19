@@ -1,0 +1,147 @@
+<section class="sticky-story-section">
+  <div class="container">
+    <div class="sticky-story-grid">
+      <!-- Sticky Media Left Column -->
+      <div class="sticky-story-media-pane">
+        {%- for block in section.blocks -%}
+          <div
+            class="sticky-story-media-img {% if forloop.first %}is-active{% endif %}"
+            data-step-index="{{ forloop.index }}"
+            style="width: 100%; height: 100%;"
+          >
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 1200 }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                style="width: 100%; height: 100%; object-fit: cover;"
+              >
+            {%- else -%}
+              <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #11141A 0%, #1A1F2B 100%); color: #64748B; padding: 2rem; text-align: center; border-radius: var(--border-radius-lg); border: 1px solid rgba(255, 255, 255, 0.08);">
+                <span style="font-size: 3rem; font-weight: 800; color: var(--color-secondary); opacity: 0.6; margin-bottom: 0.5rem;">{{ block.settings.chapter_num | default: forloop.index }}</span>
+                <span style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #FFFFFF;">{{ block.settings.chapter_title | default: 'CHAPTER' }}</span>
+                <span style="font-size: 0.75rem; color: #94A3B8; margin-top: 0.5rem;">{{ block.settings.title }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Scrolling Content Steps Right Column -->
+      <div class="sticky-story-steps-pane">
+        {%- for block in section.blocks -%}
+          <div class="sticky-story-step" data-step-index="{{ forloop.index }}" data-reveal="fade-up" {{ block.shopify_attributes }}>
+            <span class="sticky-story-counter">{{ block.settings.chapter_num | default: '01' }} &mdash; {{ block.settings.chapter_title | default: 'CHAPTER' }}</span>
+            <h3 class="sticky-story-title">{{ block.settings.title }}</h3>
+            <p class="sticky-story-desc">{{ block.settings.description }}</p>
+            {%- if block.settings.cta_text != blank -%}
+              <div style="margin-top: 0.5rem;">
+                <a href="{{ block.settings.cta_url | default: '/collections/all' }}" class="btn btn-secondary" style="color: #FFFFFF; border-color: rgba(255,255,255,0.3);">
+                  {{ block.settings.cta_text }} →
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sticky Storytelling",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "story_chapter",
+      "name": "Story Chapter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "chapter_num",
+          "label": "Chapter Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "chapter_title",
+          "label": "Chapter Label",
+          "default": "DESIGN"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Architectural Geometry & Restraint"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "We eliminate every superfluous ornament. Every angle is dictated by the ergonomic natural resting position of the human hand and spatial hardware."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Chapter Visual Image"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Link Text",
+          "default": "Explore Design Studies"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Storytelling",
+      "blocks": [
+        {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "01",
+            "chapter_title": "DESIGN",
+            "title": "Architectural Geometry & Restraint",
+            "description": "We eliminate every superfluous ornament. Every angle is dictated by the ergonomic natural resting position of the human hand."
+          }
+        },
+        {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "02",
+            "chapter_title": "MATERIAL",
+            "title": "Aerospace Grade 5 Titanium",
+            "description": "Selected for its supreme strength-to-weight ratio and hypoallergenic properties. Precision-milled to 0.02mm tolerances."
+          }
+        },
+        {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "03",
+            "chapter_title": "CRAFT",
+            "title": "Multi-Stage Hand Buffing & Satin Anodization",
+            "description": "Each surface undergoes four stages of microscopic hand finishing, creating a soft matte sheen that diffuses ambient room light."
+          }
+        },
+        {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "04",
+            "chapter_title": "EXPERIENCE",
+            "title": "Tactile Equilibrium for Modern Workspaces",
+            "description": "Engineered with integrated neodymium magnetic coupling and acoustic damping silicone pads for zero friction."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

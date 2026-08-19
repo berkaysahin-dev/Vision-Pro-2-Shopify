@@ -1,0 +1,77 @@
+<section class="section-spacing">
+  <div class="container">
+    <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
+      <a href="{{ routes.account_url }}" style="font-size: 13px; color: var(--color-text-muted);">← Return to Account Overview</a>
+      <h1 class="display-title" style="margin-top: 0.5rem;">Order {{ order.name }}</h1>
+      <p style="color: var(--color-text-muted); font-size: 14px;">Placed on {{ order.created_at | date: "%B %d, %Y %I:%M %p" }}</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; @media (min-width: 990px) { grid-template-columns: 2fr 1fr; }">
+      <div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--color-border); text-align: left;">
+              <th style="padding: 0.75rem 0;">Product</th>
+              <th style="padding: 0.75rem 0;">SKU</th>
+              <th style="padding: 0.75rem 0;">Price</th>
+              <th style="padding: 0.75rem 0;">Quantity</th>
+              <th style="padding: 0.75rem 0; text-align: right;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for line_item in order.line_items -%}
+              <tr style="border-bottom: 1px solid var(--color-border);">
+                <td style="padding: 1rem 0;">
+                  <strong>{{ line_item.title }}</strong>
+                  {%- if line_item.fulfillment -%}
+                    <div style="font-size: 12px; color: var(--color-stock-success); margin-top: 0.25rem;">
+                      Fulfilled on {{ line_item.fulfillment.created_at | date: '%b %d, %Y' }}
+                      {%- if line_item.fulfillment.tracking_number -%}
+                        • <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" style="text-decoration: underline;">Track Shipment</a>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </td>
+                <td style="padding: 1rem 0; color: var(--color-text-muted);">{{ line_item.sku | default: '—' }}</td>
+                <td style="padding: 1rem 0;">{{ line_item.price | money }}</td>
+                <td style="padding: 1rem 0;">{{ line_item.quantity }}</td>
+                <td style="padding: 1rem 0; text-align: right; font-weight: 600;">{{ line_item.final_line_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" style="padding-top: 1.5rem; text-align: right; color: var(--color-text-muted);">Subtotal:</td>
+              <td style="padding-top: 1.5rem; text-align: right; font-weight: 600;">{{ order.line_items_subtotal_price | money }}</td>
+            </tr>
+            <tr>
+              <td colspan="4" style="padding: 0.5rem 0; text-align: right; color: var(--color-text-muted);">Shipping:</td>
+              <td style="padding: 0.5rem 0; text-align: right;">{{ order.shipping_price | money }}</td>
+            </tr>
+            <tr style="font-size: 1.125rem; font-weight: 700;">
+              <td colspan="4" style="padding-top: 1rem; text-align: right;">Total:</td>
+              <td style="padding-top: 1rem; text-align: right;">{{ order.total_price | money_with_currency }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div style="background: var(--color-surface); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); font-size: 14px;">
+          <h4 style="margin-bottom: 0.5rem;">Billing Address</h4>
+          <p>{{ order.billing_address.name }}</p>
+          <p>{{ order.billing_address.address1 }}</p>
+          <p>{{ order.billing_address.city }}, {{ order.billing_address.zip }}</p>
+          <p>{{ order.billing_address.country }}</p>
+        </div>
+        <div style="background: var(--color-surface); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--color-border); font-size: 14px;">
+          <h4 style="margin-bottom: 0.5rem;">Shipping Address</h4>
+          <p>{{ order.shipping_address.name }}</p>
+          <p>{{ order.shipping_address.address1 }}</p>
+          <p>{{ order.shipping_address.city }}, {{ order.shipping_address.zip }}</p>
+          <p>{{ order.shipping_address.country }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

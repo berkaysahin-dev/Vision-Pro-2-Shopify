@@ -1,0 +1,117 @@
+{%- paginate collection.products by section.settings.products_per_page -%}
+
+<section class="section-spacing">
+  <div class="container">
+    <!-- Collection Hero Header -->
+    <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-lg);" data-reveal="fade-up">
+      <div class="section-subtitle">{{ 'collections.general.title' | t | default: 'Collection' }}</div>
+      <h1 class="display-title" style="margin: 0.25rem 0 0.75rem;">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 680px; line-height: 1.6;">
+          {{ collection.description }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Filter & Sort Bar -->
+    <div class="collection-toolbar" data-reveal="fade-up">
+      <div style="font-size: 13px; color: var(--color-text-muted);">
+        {{ 'collections.general.items_count' | t: count: collection.products_count }}
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <!-- Sorting -->
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 13px;">
+          <label for="SortBy" style="color: var(--color-text-muted);">Sort:</label>
+          <select
+            name="sort_by"
+            id="SortBy"
+            class="form-select"
+            style="width: auto; height: 36px; padding: 0 1.75rem 0 0.75rem; font-size: 13px;"
+            onchange="location.href = window.location.pathname + '?' + new URLSearchParams({...Object.fromEntries(new URLSearchParams(window.location.search)), sort_by: this.value}).toString();"
+          >
+            {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured Selection</option>
+            <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+            <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+            <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+            <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Newest First</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid (No sidebar filters - clean layout) -->
+    <div>
+      {%- if collection.products.size == 0 -%}
+        <div style="text-align: center; padding: 5rem 1rem;">
+          <p style="font-size: 1.125rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+            {{ 'collections.general.no_products' | t | default: 'No products match your selected filters.' }}
+          </p>
+          <a href="{{ collection.url }}" class="btn btn-secondary btn-sm">Clear All Filters</a>
+        </div>
+      {%- else -%}
+        <div class="collection-product-grid">
+          {%- for product in collection.products -%}
+            <div data-reveal="fade-up" class="delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+              {% render 'product-card', card_product: product %}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <!-- Pagination -->
+        {% render 'pagination', paginate: paginate %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .collection-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .collection-product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .collection-product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 990px) {
+    .collection-product-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "label": "Products Per Page",
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

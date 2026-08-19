@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "Complementary Curation",
+        "title": "Complete Your Setup",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": false,
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "subtitle": "Product Inquiries",
+        "title": "Frequently Inquired Details",
+        "bg_color": "#FFFFFF"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recommendations",
+    "faq"
+  ]
+}

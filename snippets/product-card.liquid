@@ -1,0 +1,140 @@
+{%- comment -%}
+  VISION PRO 2 — ULTRA-PREMIUM PRODUCT CARD
+  Supports secondary hover image, color swatches, quick add, quick view, wishlist
+{%- endcomment -%}
+
+{%- liquid
+  assign card_product = card_product | default: product
+  assign aspect_ratio = settings.card_image_ratio | default: 'portrait'
+  assign show_secondary = settings.card_show_secondary_image | default: true
+  assign show_vendor = settings.card_show_vendor | default: false
+  assign show_rating = settings.card_show_rating | default: true
+  assign show_quick_add = settings.card_show_quick_add | default: true
+  assign show_quick_view = settings.card_show_quick_view | default: true
+  assign show_wishlist = settings.card_show_wishlist | default: true
+  assign show_swatches = settings.card_show_swatches | default: true
+
+  assign featured_media = card_product.featured_media
+  assign secondary_media = card_product.media[1]
+
+  assign is_on_sale = false
+  if card_product.compare_at_price > card_product.price
+    assign is_on_sale = true
+    assign discount_percent = card_product.compare_at_price | minus: card_product.price | times: 100 | divided_by: card_product.compare_at_price
+  endif
+-%}
+
+<div class="product-card" data-product-id="{{ card_product.id }}" data-handle="{{ card_product.handle }}">
+  <!-- Media / Image Container -->
+  <div class="product-card__media-wrapper ratio--{{ aspect_ratio }}">
+    <!-- Badges -->
+    <div class="product-card__badges">
+      {%- if card_product.available == false -%}
+        <span class="badge badge-outline">{{ 'products.product.sold_out' | t | default: 'Sold Out' }}</span>
+      {%- elsif is_on_sale -%}
+        <span class="badge badge-sale">-{{ discount_percent }}%</span>
+      {%- elsif card_product.tags contains 'new' or card_product.tags contains 'New' -%}
+        <span class="badge badge-new">New</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Wishlist Button -->
+    {%- if show_wishlist -%}
+      <button type="button" class="product-card__wishlist-btn" data-wishlist-btn data-product-handle="{{ card_product.handle }}" aria-label="{{ 'products.wishlist.add' | t | default: 'Add to Wishlist' }}">
+        {% render 'icon', icon: 'heart' %}
+      </button>
+    {%- endif -%}
+
+    <!-- Images -->
+    <a href="{{ card_product.url | default: '#' }}" class="product-card__image-link">
+      {%- if featured_media != blank -%}
+        <img
+          src="{{ featured_media | image_url: width: 600 }}"
+          alt="{{ featured_media.alt | escape | default: card_product.title }}"
+          class="product-card__image product-card__image--primary"
+          loading="lazy"
+          width="600"
+          height="800"
+        >
+        {%- if show_secondary and secondary_media != blank -%}
+          <img
+            src="{{ secondary_media | image_url: width: 600 }}"
+            alt="{{ secondary_media.alt | escape | default: card_product.title }}"
+            class="product-card__image product-card__image--secondary"
+            loading="lazy"
+            width="600"
+            height="800"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--color-surface); color: var(--color-text-muted);">
+          {{ 'product-1' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+    </a>
+
+    <!-- Quick Actions (Hover) -->
+    <div class="product-card__quick-actions">
+      {%- if show_quick_add and card_product.available -%}
+        {%- if card_product.has_only_default_variant -%}
+          <form action="/cart/add" method="post" enctype="multipart/form-data" style="flex: 1;">
+            <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="product-card__quick-btn btn-full">
+              {{ 'products.product.quick_add' | t | default: 'Quick Add' }}
+            </button>
+          </form>
+        {%- else -%}
+          <a href="{{ card_product.url }}" class="product-card__quick-btn">
+            {{ 'products.product.choose_options' | t | default: 'Select Options' }}
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if show_quick_view -%}
+        <button type="button" class="product-card__quick-btn" data-quick-view-btn data-product-handle="{{ card_product.handle }}" aria-label="{{ 'products.product.quick_view' | t | default: 'Quick View' }}" style="flex: 0 0 40px; padding: 0;">
+          {% render 'icon', icon: 'eye' %}
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-card__info">
+    {%- if show_vendor and card_product.vendor != blank -%}
+      <div class="product-card__vendor">{{ card_product.vendor }}</div>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ card_product.url | default: '#' }}">{{ card_product.title | default: 'Vision SH Spatial Item' }}</a>
+    </h3>
+
+    {%- if show_rating -%}
+      <div class="product-card__rating">
+        {% render 'icon', icon: 'star' %}
+        <span style="font-weight: 600; font-size: 12px; color: var(--color-text);">4.9</span>
+        <span class="product-card__rating-count">(38)</span>
+      </div>
+    {%- endif -%}
+
+    {% render 'price', product_resource: card_product %}
+
+    <!-- Color Swatches Preview -->
+    {%- if show_swatches -%}
+      {%- for option in card_product.options_with_values -%}
+        {%- assign downcase_name = option.name | downcase -%}
+        {%- if downcase_name == 'color' or downcase_name == 'colour' or downcase_name == 'renk' -%}
+          <div class="product-card__swatches">
+            {%- for value in option.values limit: 5 -%}
+              {%- assign color_code = value | downcase | replace: ' ', '' -%}
+              <span
+                class="product-card__swatch {% if forloop.first %}is-active{% endif %}"
+                style="background-color: {{ color_code }};"
+                title="{{ value }}"
+              ></span>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>

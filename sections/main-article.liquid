@@ -1,0 +1,29 @@
+<article class="section-spacing">
+  <div class="container-narrow">
+    <div style="margin-bottom: var(--space-xl); text-align: center;">
+      <span class="text-uppercase text-muted">{{ article.published_at | date: '%B %d, %Y' }} • By {{ article.author }}</span>
+      <h1 class="display-title" style="margin: 0.5rem 0 1rem;">{{ article.title }}</h1>
+    </div>
+
+    {%- if article.image -%}
+      <div style="border-radius: var(--border-radius-lg); overflow: hidden; aspect-ratio: 16/9; margin-bottom: var(--space-xl);">
+        <img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.title | escape }}" loading="eager" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    {%- endif -%}
+
+    <div style="font-size: 1.125rem; line-height: 1.85; color: var(--color-text);">
+      {{ article.content }}
+    </div>
+
+    <div style="margin-top: var(--space-2xl); padding-top: 1.5rem; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+      <a href="{{ blog.url }}" class="btn btn-secondary btn-sm">← Back to {{ blog.title }}</a>
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article Monograph",
+  "settings": []
+}
+{% endschema %}
