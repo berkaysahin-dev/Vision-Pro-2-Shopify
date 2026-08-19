@@ -493,3 +493,17 @@
   font-size: var(--font-size-sm);
   font-weight: 700;
 }
+
+@media (max-width: 640px) {
+  .sticky-atc-bar__title {
+    max-width: 130px;
+    font-size: 12px;
+  }
+  .sticky-atc-bar__price {
+    font-size: 12px;
+  }
+  .sticky-atc-bar__thumb {
+    width: 36px;
+    height: 36px;
+  }
+}

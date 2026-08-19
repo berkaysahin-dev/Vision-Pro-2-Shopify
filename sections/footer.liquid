@@ -1,11 +1,13 @@
 <footer class="footer-wrapper" style="background-color: #07080A; color: #FFFFFF; padding: var(--space-2xl) 0 var(--space-lg); border-top: 1px solid rgba(255, 255, 255, 0.08);">
   <div class="container">
-    <!-- Massive Editorial Wordmark -->
-    <div style="margin-bottom: var(--space-2xl); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 2rem;" data-reveal="fade-up">
-      <div style="font-family: var(--font-family-heading); font-size: clamp(3.5rem, 8vw, 9rem); font-weight: 800; letter-spacing: -0.05em; text-transform: uppercase; line-height: 0.9; color: rgba(255, 255, 255, 0.08); user-select: none;">
-        {{ shop.name | default: 'VISION SH' }}
+    <!-- Massive Editorial Wordmark (Centered & Customizable) -->
+    {%- if section.settings.show_wordmark -%}
+      <div style="margin-bottom: var(--space-2xl); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 2rem; text-align: center; overflow: hidden;" data-reveal="fade-up">
+        <div style="font-family: var(--font-family-heading); font-size: clamp(2.75rem, 8.5vw, 9.5rem); font-weight: 800; letter-spacing: -0.03em; text-transform: uppercase; line-height: 0.95; color: rgba(255, 255, 255, 0.09); user-select: none; text-align: center; width: 100%; display: block;">
+          {{ section.settings.wordmark_text | default: shop.name | default: 'VISION SH' }}
+        </div>
       </div>
-    </div>
+    {%- endif -%}
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-bottom: var(--space-2xl);">
       <!-- Brand Manifesto -->
@@ -70,10 +72,10 @@
       {%- endfor -%}
     </div>
 
-    <!-- Bottom Bar -->
+    <!-- Bottom Bar with Shaz Vision Signature -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 12px; color: #64748B;">
       <div>
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved. Engineered with precision.
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved. Crafted &amp; Designed by <a href="https://shazvision.com" target="_blank" rel="noopener" style="color: #CBD5E1; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; transition: color var(--transition-fast);">Shaz Vision</a>.
       </div>
       <div style="display: flex; gap: 1.5rem;">
         <span>🔒 256-Bit SSL Encrypted</span>
@@ -87,6 +89,18 @@
 {
   "name": "Footer",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_wordmark",
+      "label": "Show Large Editorial Wordmark",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "wordmark_text",
+      "label": "Wordmark Text (Centered)",
+      "default": "VISION SH"
+    },
     {
       "type": "textarea",
       "id": "brand_text",

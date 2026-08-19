@@ -88,6 +88,16 @@ html {
   color: var(--color-text);
 }
 
+::selection {
+  background-color: #0F1115;
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background-color: #0F1115;
+  color: #FFFFFF;
+}
+
 body {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body);

@@ -152,18 +152,6 @@
         "cta_2_url": "/pages/about"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "subtitle": "Curated Essentials",
-        "title": "Selected Spatial Objects",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "view_all_label": "View Entire Catalog",
-        "bg_color": "#FFFFFF"
-      }
-    },
     "before_after": {
       "type": "before-after",
       "settings": {
@@ -206,7 +194,6 @@
     "sticky_story",
     "product_showcase",
     "cinematic_banner",
-    "featured_collection",
     "before_after",
     "brand_logos",
     "faq",
