@@ -1,4 +1,4 @@
-# Vision Pro 2 — Ultra-Luxury Shopify OS 2.0 Theme
+# Shaz Pro 2 — Ultra-Luxury Shopify OS 2.0 Theme
 
 <p align="center">
   <a href="README.md"><b>English</b></a> | <a href="README.tr.md"><b>Türkçe</b></a>
@@ -17,7 +17,7 @@
   <strong>An architectural, high-conversion commercial Shopify Online Store 2.0 theme inspired by luxury industrial design, titanium metallurgy, and modern spatial computing aesthetics.</strong>
 </p>
 
-[Live Demo Flagship](https://vision-sh.myshopify.com) &bull; [Shaz Vision](https://shazvision.com) &bull; [Download Theme ZIP](Vision-Pro-2-Theme.zip)
+[Live Demo Flagship](https://vision-sh.myshopify.com) &bull; [Shaz Agency](https://shazagency.com) &bull; [Download Theme ZIP](Vision-Pro-2-Theme.zip)
 
 </div>
 
@@ -25,7 +25,7 @@
 
 ## Core Design Philosophy & Architecture
 
-Vision Pro 2 is engineered to break away from generic, cluttered e-commerce templates. It provides an editorial luxury experience inspired by Apple, Leica, and high-end architectural monographs:
+Shaz Pro 2 is engineered to break away from generic, cluttered e-commerce templates. It provides an editorial luxury experience inspired by Apple, Leica, and high-end architectural monographs:
 
 - **100% Fluid Responsive System**: Fully responsive from 320px ultra-compact phones to 4K ultra-wide monitors with dynamic clamp scaling, touch-optimized targets, and zero horizontal scroll leaks.
 - **60fps Native Vanilla Motion Engine**: Hardware-accelerated IntersectionObserver scroll reveals, parallax media containers, and fluid element entrances without jQuery or bloated animation libraries.
@@ -56,7 +56,7 @@ Vision Pro 2 is engineered to break away from generic, cluttered e-commerce temp
 | **Press & Brand Logos** | Minimalist publication row (Wallpaper*, Monocle, Wired, Architectural Digest) | Unlimited press blocks with optional SVG/PNG logos |
 | **FAQ Accordion** | Native collapsible question & answer accordions | Single or multi-expand modes, rich text answers |
 | **Newsletter** | High-conversion email capture with privacy disclaimers | Title, subtitle, badge, background colors |
-| **Footer & Wordmark** | Editorial footer with centered large brand wordmark and Shaz Vision signature | Customizable centered wordmark, brand bio, multi-column navigation, newsletter |
+| **Footer & Wordmark** | Editorial footer with centered large brand wordmark and Shaz Agency signature | Customizable centered wordmark, brand bio, multi-column navigation, newsletter |
 
 ---
 
@@ -77,8 +77,8 @@ Vision Pro 2 is engineered to break away from generic, cluttered e-commerce temp
 ### Method 1: Shopify CLI (Recommended for Developers)
 ```bash
 # 1. Clone the repository
-git clone https://github.com/berkaysahin-dev/Vision-Pro-2-Shopify.git
-cd Vision-Pro-2-Shopify
+git clone https://github.com/berkaysahin-dev/shaz-Pro-2-Shopify.git
+cd Shaz-Pro-2-Shopify
 
 # 2. Push directly to your Shopify store
 shopify theme push --store your-store.myshopify.com
@@ -89,7 +89,7 @@ shopify theme dev --store your-store.myshopify.com
 
 ### Method 2: Manual ZIP Upload
 
-1. Download or use the [`Vision-Pro-2-Theme.zip`](Vision-Pro-2-Theme.zip) file included in this repository (or from [Releases](https://github.com/berkaysahin-dev/Vision-Pro-2-Shopify/releases)).
+1. Download or use the [`Vision-Pro-2-Theme.zip`](Vision-Pro-2-Theme.zip) file included in this repository (or from [Releases](https://github.com/berkaysahin-dev/shaz-Pro-2-Shopify/releases)).
 2. In Shopify Admin, go to **Online Store → Themes**.
 3. Under **Theme Library**, click **Add theme → Upload zip file**.
 4. Select `Vision-Pro-2-Theme.zip` and click **Publish**.
@@ -98,7 +98,7 @@ shopify theme dev --store your-store.myshopify.com
 
 ## Credits & Signature
 
-Designed & Engineered by **[Shaz Vision](https://shazvision.com)**.
+Designed & Engineered by **[Shaz Agency](https://shazagency.com)**.
 
 ---
 
