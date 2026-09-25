@@ -1,0 +1,167 @@
+<footer class="footer-wrapper" style="background-color: #07080A; color: #FFFFFF; padding: clamp(2.5rem, 4vw, 4rem) 0 var(--space-lg); border-top: 1px solid rgba(255, 255, 255, 0.08);">
+  <div class="container">
+    <!-- Centered Editorial Wordmark (Refined Scale & Spacing) -->
+    {%- if section.settings.show_wordmark -%}
+      <div style="margin-bottom: clamp(1.5rem, 3vw, 2.5rem); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1.5rem; text-align: center; overflow: hidden;" data-reveal="fade-up">
+        <div style="font-family: var(--font-family-heading); font-size: clamp(1.75rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; color: rgba(255, 255, 255, 0.08); user-select: none; text-align: center; width: 100%; display: block;">
+          {{ section.settings.wordmark_text | default: shop.name | default: 'VISION SH' }}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-bottom: var(--space-2xl);">
+      <!-- Brand Manifesto -->
+      <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <h3 style="font-size: 1.5rem; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF;">
+          {{ shop.name | default: 'VISION SH' }}
+        </h3>
+        <p style="color: #94A3B8; font-size: 14px; line-height: 1.7; max-width: 320px;">
+          {{ section.settings.brand_text | default: 'Meticulously engineered spatial essentials. Guided by the principles of architectural restraint, pure metallurgy, and timeless functional design.' }}
+        </p>
+        <div style="display: flex; gap: 1rem; color: #94A3B8; font-size: 13px;">
+          {%- if settings.social_instagram_link != blank -%}
+            <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" style="color: inherit;">Instagram</a>
+          {%- endif -%}
+          {%- if settings.social_twitter_link != blank -%}
+            <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" style="color: inherit;">X / Twitter</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Navigation Columns (Blocks) -->
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'link_list' -%}
+            <div {{ block.shopify_attributes }} style="display: flex; flex-direction: column; gap: 1rem;">
+              <h4 style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #64748B;">
+                {{ block.settings.title | default: linklists[block.settings.menu].title }}
+              </h4>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                {%- for link in linklists[block.settings.menu].links -%}
+                  <li>
+                    <a href="{{ link.url }}" style="font-size: 14px; color: #CBD5E1; transition: color var(--transition-fast);">{{ link.title }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+
+          {%- when 'newsletter' -%}
+            <div {{ block.shopify_attributes }} style="display: flex; flex-direction: column; gap: 1rem;">
+              <h4 style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #64748B;">
+                {{ block.settings.title | default: 'Private Dispatch' }}
+              </h4>
+              <p style="color: #94A3B8; font-size: 14px; line-height: 1.6;">
+                {{ block.settings.subtext | default: 'Receive seasonal previews, editorial lookbooks, and private gallery invites.' }}
+              </p>
+              {% form 'customer', class: 'footer-newsletter-form' %}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div style="display: flex; gap: 0.5rem;">
+                  <input
+                    type="email"
+                    name="contact[email]"
+                    class="form-input"
+                    placeholder="Enter email address"
+                    style="background: #14171F; border-color: #242936; color: #FFFFFF; font-size: 13px;"
+                    required
+                  >
+                  <button type="submit" class="btn btn-white btn-sm">Subscribe</button>
+                </div>
+              {% endform %}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Bottom Bar with Shaz Vision Signature -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 12px; color: #64748B;">
+      <div>
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved. Crafted &amp; Designed by <a href="https://shazvision.com" target="_blank" rel="noopener" style="color: #CBD5E1; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; transition: color var(--transition-fast);">Shaz Vision</a>.
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <span>🔒 256-Bit SSL Encrypted</span>
+        <span>🌍 Carbon-Neutral Shipping</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_wordmark",
+      "label": "Show Editorial Wordmark",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "wordmark_text",
+      "label": "Wordmark Text (Centered)",
+      "default": "VISION SH"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand Narrative Statement",
+      "default": "Meticulously engineered spatial essentials. Guided by the principles of architectural restraint, pure metallurgy, and timeless functional design."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "Collection"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter Block",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Private Dispatch"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtitle",
+          "default": "Receive seasonal previews, editorial lookbooks, and private gallery invites."
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list",
+        "settings": { "title": "Collection" }
+      },
+      {
+        "type": "link_list",
+        "settings": { "title": "Customer Care" }
+      },
+      {
+        "type": "newsletter",
+        "settings": {}
+      }
+    ]
+  }
+}
+{% endschema %}

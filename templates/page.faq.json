@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "subtitle": "Knowledge Base",
+        "title": "Frequently Inquired Questions",
+        "bg_color": "#FFFFFF"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "badge": "Need Assistance?",
+        "title": "Connect with Client Concierge",
+        "subtitle": "Our concierge team is available 24/7 for tailored product consultations.",
+        "bg_color": "#F8F9FA"
+      }
+    }
+  },
+  "order": [
+    "faq",
+    "newsletter"
+  ]
+}

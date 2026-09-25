@@ -1,0 +1,115 @@
+{%- liquid
+  assign featured_collection = collections[section.settings.collection]
+  assign products_to_show = section.settings.products_to_show | default: 4
+  assign columns_desktop = section.settings.columns_desktop | default: 4
+-%}
+
+<section class="section-spacing" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;" data-reveal="fade-up">
+      <div>
+        {%- if section.settings.subtitle != blank -%}
+          <div class="section-subtitle">{{ section.settings.subtitle }}</div>
+        {%- endif -%}
+        <h2 class="h2">{{ section.settings.title | default: 'Curated Essentials' }}</h2>
+      </div>
+      {%- if section.settings.show_view_all and featured_collection.url != blank -%}
+        <a href="{{ featured_collection.url }}" class="btn btn-secondary btn-sm">
+          {{ section.settings.view_all_label | default: 'View Entire Collection' }} →
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Products Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 20vw, 320px), 1fr)); gap: clamp(1.25rem, 2.5vw, 2.5rem);">
+      {%- if featured_collection != blank and featured_collection.products.size > 0 -%}
+        {%- for product in featured_collection.products limit: products_to_show -%}
+          <div data-reveal="fade-up" class="delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+            {% render 'product-card', card_product: product %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign sample_images = "https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=800&auto=format&fit=crop,https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop,https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop,https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=800&auto=format&fit=crop" | split: ',' -%}
+        {%- for img in sample_images limit: products_to_show -%}
+          <div class="product-card" data-reveal="fade-up" class="delay-{{ forloop.index }}">
+            <div class="product-card__media-wrapper ratio--portrait">
+              <img src="{{ img }}" alt="Vision SH Edition Item {{ forloop.index }}" class="product-card__image" loading="lazy" width="600" height="800">
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__vendor">Vision SH Studio</span>
+              <h3 class="product-card__title"><a href="/collections/all">Titanium Spatial Pedestal 0{{ forloop.index }}</a></h3>
+              <div class="product-card__price">$240.00</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle / Category Tag",
+      "default": "Selected Pieces"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Heading",
+      "default": "Curated Essentials"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Total Products to Show",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on Desktop",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Button Label",
+      "default": "View Entire Collection"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,194 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "enable_fullscreen": true,
+        "height_mobile": 90,
+        "overlay_opacity": 45,
+        "text_alignment": "left",
+        "badge": "Series 02 Edition",
+        "heading": "Architectural Form.\nPure Function.",
+        "subheading": "Explore a considered collection of minimalist luxury accessories, spatial audio pedestals, and precision-machined titanium hardware.",
+        "primary_cta_text": "Explore Series 02",
+        "primary_cta_url": "/collections/all",
+        "secondary_cta_text": "Our Craft Monograph",
+        "secondary_cta_url": "/pages/about"
+      }
+    },
+    "marquee_1": {
+      "type": "marquee",
+      "blocks": {
+        "item_1": {
+          "type": "marquee_item",
+          "settings": { "text": "VISION SH — FORM / FUNCTION / FUTURE" }
+        },
+        "item_2": {
+          "type": "marquee_item",
+          "settings": { "text": "AEROSPACE GRADE 5 TITANIUM BILLET" }
+        },
+        "item_3": {
+          "type": "marquee_item",
+          "settings": { "text": "COMPLIMENTARY WORLDWIDE EXPRESS DISPATCH" }
+        },
+        "item_4": {
+          "type": "marquee_item",
+          "settings": { "text": "LIMITED 500-UNIT GLOBAL NUMBERED PRODUCTION" }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {
+        "direction": "normal",
+        "speed": 26,
+        "divider": "✦",
+        "bg_color": "#0B0C10",
+        "text_color": "#FFFFFF"
+      }
+    },
+    "horizontal_rail": {
+      "type": "horizontal-rail",
+      "settings": {
+        "subtitle": "Curated Signature Series",
+        "title": "Precision Spatial Pedestals",
+        "products_to_show": 6,
+        "bg_color": "#FFFFFF"
+      }
+    },
+    "editorial_story": {
+      "type": "editorial-story",
+      "settings": {
+        "subtitle": "Design Philosophy",
+        "title": "Where Architectural Restraint Meets Tactile Luxury.",
+        "quote": "We do not build ordinary accessories. We craft timeless spatial artifacts designed to elevate the human touch.",
+        "body_text": "Founded in Milan with engineering studios in Tokyo, Vision SH operates on the conviction that digital tools should exist in total aesthetic harmony with refined physical environments.",
+        "cta_text": "Read the Vision SH Monograph",
+        "cta_url": "/pages/about",
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "sticky_story": {
+      "type": "sticky-storytelling",
+      "blocks": {
+        "chap_1": {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "01",
+            "chapter_title": "DESIGN",
+            "title": "Architectural Geometry & Restraint",
+            "description": "We eliminate every superfluous ornament. Every angle is dictated by the ergonomic natural resting position of the human hand and spatial computing hardware."
+          }
+        },
+        "chap_2": {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "02",
+            "chapter_title": "MATERIAL",
+            "title": "Aerospace Grade 5 Titanium",
+            "description": "Selected for its supreme strength-to-weight ratio and hypoallergenic properties. Precision-milled to 0.02mm microscopic tolerances."
+          }
+        },
+        "chap_3": {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "03",
+            "chapter_title": "CRAFT",
+            "title": "Multi-Stage Hand Buffing & Satin Anodization",
+            "description": "Each surface undergoes four stages of microscopic hand finishing, creating a soft matte sheen that diffuses ambient room light with subtle grace."
+          }
+        },
+        "chap_4": {
+          "type": "story_chapter",
+          "settings": {
+            "chapter_num": "04",
+            "chapter_title": "EXPERIENCE",
+            "title": "Tactile Equilibrium for Modern Workspaces",
+            "description": "Engineered with integrated neodymium magnetic coupling and acoustic damping silicone pads for zero friction and permanent stability."
+          }
+        }
+      },
+      "block_order": [
+        "chap_1",
+        "chap_2",
+        "chap_3",
+        "chap_4"
+      ],
+      "settings": {}
+    },
+    "product_showcase": {
+      "type": "product-showcase",
+      "settings": {
+        "badge": "Engineering Spotlight",
+        "heading": "Uncompromising Micro-Tolerances.",
+        "description": "Machined from a monolithic billet of Grade 5 titanium, every bevel and surface is hand-finished to microscopic precision.",
+        "spec_1_val": "Grade 5",
+        "spec_1_label": "Aerospace Titanium",
+        "spec_2_val": "0.02 mm",
+        "spec_2_label": "CNC Milling Precision",
+        "spec_3_val": "100%",
+        "spec_3_label": "Recycled Monolith Box",
+        "spec_4_val": "Lifetime",
+        "spec_4_label": "Structural Guarantee",
+        "cta_text": "Acquire the Edition",
+        "cta_url": "/collections/all",
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "cinematic_banner": {
+      "type": "cinematic-banner",
+      "settings": {
+        "height": 80,
+        "overlay_opacity": 50,
+        "eyebrow": "THE MONOLITH PHILOSOPHY",
+        "heading": "Pure Materiality.\nZero Compromise.",
+        "subheading": "Every piece is manufactured under ISO-certified microscopic tolerances, creating timeless artifacts that endure across decades of daily use.",
+        "cta_1_text": "Explore All Creations",
+        "cta_1_url": "/collections/all",
+        "cta_2_text": "Read the Manifesto",
+        "cta_2_url": "/pages/about"
+      }
+    },
+    "before_after": {
+      "type": "before-after",
+      "settings": {
+        "subtitle": "Finishing Process",
+        "title": "The Art of Micro-Finishing",
+        "description": "Slide to observe the meticulous transition from raw CNC-milled billet to our multi-stage hand-buffed satin finish.",
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "subtitle": "Client Concierge",
+        "title": "Frequently Inquired Details",
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "badge": "The Vision SH Dispatch",
+        "title": "Join the Vision SH Society",
+        "subtitle": "Receive private invitations, seasonal preview catalogs, and editorial design perspectives.",
+        "bg_color": "#FFFFFF"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee_1",
+    "horizontal_rail",
+    "editorial_story",
+    "sticky_story",
+    "product_showcase",
+    "cinematic_banner",
+    "before_after",
+    "faq",
+    "newsletter"
+  ]
+}

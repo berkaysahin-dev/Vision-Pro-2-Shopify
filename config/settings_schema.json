@@ -1,0 +1,388 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Vision Pro 2",
+    "theme_version": "2.0.0",
+    "theme_author": "Vision SH Studio",
+    "theme_documentation_url": "https://visionsh.dev/docs",
+    "theme_support_url": "https://visionsh.dev/support"
+  },
+  {
+    "name": "Colors & Theme",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Color Palette"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Accent",
+        "default": "#0F1115"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Accent / Gold",
+        "default": "#C6A87D"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background Main",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface / Cards",
+        "default": "#F8F9FA"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Main",
+        "default": "#111827"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Text Muted / Subtitle",
+        "default": "#64748B"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders & Dividers",
+        "default": "#E2E8F0"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale / Discount Badge",
+        "default": "#E11D48"
+      },
+      {
+        "type": "color",
+        "id": "color_stock_success",
+        "label": "In Stock / Urgency Green",
+        "default": "#10B981"
+      },
+      {
+        "type": "color",
+        "id": "color_button_bg",
+        "label": "Button Background",
+        "default": "#0F1115"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Button Text",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_scale",
+        "min": 85,
+        "max": 120,
+        "step": 5,
+        "unit": "%",
+        "label": "Body Font Scale",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "font_heading_scale",
+        "min": 85,
+        "max": 140,
+        "step": 5,
+        "unit": "%",
+        "label": "Heading Font Scale",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "heading_letter_spacing",
+        "label": "Heading Letter Spacing",
+        "options": [
+          { "value": "-0.04em", "label": "Tight (-0.04em)" },
+          { "value": "-0.02em", "label": "Editorial Modern (-0.02em)" },
+          { "value": "0", "label": "Normal (0)" },
+          { "value": "0.05em", "label": "Spacious (0.05em)" }
+        ],
+        "default": "-0.02em"
+      }
+    ]
+  },
+  {
+    "name": "Layout & Styling",
+    "settings": [
+      {
+        "type": "range",
+        "id": "container_max_width",
+        "min": 1200,
+        "max": 1680,
+        "step": 40,
+        "unit": "px",
+        "label": "Container Max Width",
+        "default": 1440
+      },
+      {
+        "type": "range",
+        "id": "border_radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "label": "Global Border Radius",
+        "default": 6
+      },
+      {
+        "type": "select",
+        "id": "shadow_style",
+        "label": "Shadow Style",
+        "options": [
+          { "value": "none", "label": "None / Flat" },
+          { "value": "subtle", "label": "Subtle Luxury (Soft)" },
+          { "value": "elevated", "label": "Elevated Modern" }
+        ],
+        "default": "subtle"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_micro_animations",
+        "label": "Enable Micro-Interactions & Hover Dynamics",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product Cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image Aspect Ratio",
+        "options": [
+          { "value": "portrait", "label": "Portrait (3:4) - Recommended for Luxury" },
+          { "value": "square", "label": "Square (1:1)" },
+          { "value": "landscape", "label": "Landscape (4:3)" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_secondary_image",
+        "label": "Show Secondary Image on Hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_swatches",
+        "label": "Show Color Swatches with Instant Preview",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Show Brand / Vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_rating",
+        "label": "Show Star Rating",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_quick_add",
+        "label": "Enable Quick Add to Cart",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_quick_view",
+        "label": "Enable Quick View Modal",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_wishlist",
+        "label": "Enable Wishlist Button",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart Drawer & Conversion",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Experience",
+        "options": [
+          { "value": "drawer", "label": "Slide-Out AJAX Drawer" },
+          { "value": "page", "label": "Standard Cart Page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_enable_free_shipping_bar",
+        "label": "Enable Free Shipping Progress Bar",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free Shipping Threshold (Amount in Store Currency)",
+        "default": 150
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_message",
+        "label": "Free Shipping Progress Message",
+        "default": "Add [amount] more to unlock Free Worldwide Express Shipping"
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_unlocked_message",
+        "label": "Free Shipping Unlocked Message",
+        "default": "🎉 Congratulations! You have unlocked Free Express Shipping."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_notes",
+        "label": "Enable Order Note / Gift Message",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_enable_upsells",
+        "label": "Enable In-Drawer Cross-Sell Recommendations",
+        "default": true
+      },
+      {
+        "type": "collection",
+        "id": "cart_upsell_collection",
+        "label": "Cart Upsell Collection (Fallback to Featured)"
+      }
+    ]
+  },
+  {
+    "name": "Product Page (PDP) Conversions",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "pdp_enable_sticky_atc",
+        "label": "Enable Sticky Add to Cart Bar on Scroll",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pdp_enable_live_stock",
+        "label": "Show Scarcity Stock Indicator ('Only X left in stock')",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "pdp_stock_threshold",
+        "label": "Stock Urgency Threshold (Show when less than)",
+        "default": 10
+      },
+      {
+        "type": "checkbox",
+        "id": "pdp_enable_delivery_estimator",
+        "label": "Show Real-time Delivery Countdown Estimator",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pdp_delivery_days_range",
+        "label": "Estimated Delivery Timeframe",
+        "default": "2-4 Business Days"
+      },
+      {
+        "type": "checkbox",
+        "id": "pdp_enable_trust_badges",
+        "label": "Show Security & Trust Badges below Add to Cart",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "pdp_shipping_badge_bg",
+        "label": "Express Shipping Banner Background",
+        "default": "#F0FDF4"
+      },
+      {
+        "type": "color",
+        "id": "pdp_shipping_badge_text",
+        "label": "Express Shipping Banner Text Color",
+        "default": "#166534"
+      },
+      {
+        "type": "color",
+        "id": "pdp_shipping_badge_border",
+        "label": "Express Shipping Banner Border Color",
+        "default": "#BBF7D0"
+      },
+      {
+        "type": "color",
+        "id": "pdp_stock_pulse_color",
+        "label": "Live Stock Pulse Indicator Color",
+        "default": "#E11D48"
+      },
+      {
+        "type": "color",
+        "id": "pdp_stock_text_color",
+        "label": "Stock Urgency Text Color",
+        "default": "#111827"
+      }
+    ]
+  },
+  {
+    "name": "Social & Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram URL",
+        "default": "https://instagram.com"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "X (Twitter) URL",
+        "default": "https://x.com"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube URL"
+      }
+    ]
+  }
+]

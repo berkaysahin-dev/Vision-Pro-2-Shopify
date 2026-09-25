@@ -1,0 +1,105 @@
+<section class="section-spacing" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="section-header text-center">
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.title | default: 'Frequently Inquired Details' }}</h2>
+    </div>
+
+    <div class="faq-container" data-accordion-type="single">
+      {%- for block in section.blocks -%}
+        <div class="faq-item {% if forloop.first %}is-open{% endif %}" {{ block.shopify_attributes }}>
+          <button type="button" class="faq-header" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-icon">{% render 'icon', icon: 'chevron-down' %}</span>
+          </button>
+          <div class="faq-content">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Client Concierge"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Inquired Details"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Question & Answer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What precision grade is utilized for the titanium hardware?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "All Atelier structural pieces are CNC-milled from certified aerospace Grade 5 Ti-6Al-4V titanium, renowned for its extraordinary strength-to-weight ratio and natural resistance to corrosion."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What precision grade is utilized for the titanium hardware?",
+            "answer": "All Atelier structural pieces are CNC-milled from certified aerospace Grade 5 Ti-6Al-4V titanium, renowned for its extraordinary strength-to-weight ratio and natural resistance to corrosion."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does complimentary express delivery operate internationally?",
+            "answer": "We partner with DHL Express and FedEx Priority to deliver all orders globally within 2-4 business days. All duties and customs clearances are pre-calculated and covered by Atelier."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the policy for returns and exchanges?",
+            "answer": "We offer a 30-day trial period. If you are not completely satisfied with your piece, we provide a prepaid return label for a prompt and courteous full refund."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is there a manufacturer warranty on mechanical elements?",
+            "answer": "Every Atelier object comes with our 2-Year Craftsmanship Guarantee, covering all structural integrity and magnetic coupling assemblies."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

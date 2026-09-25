@@ -1,0 +1,222 @@
+{%- liquid
+  assign enable_transparent = section.settings.enable_transparent_header
+  assign main_menu = linklists[section.settings.menu] | default: linklists.main-menu
+-%}
+
+<header class="header-wrapper">
+  <div class="container">
+    <div class="header-main">
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="header__hamburger" aria-label="{{ 'general.accessibility.open_menu' | t | default: 'Open Navigation' }}">
+        <span class="header__hamburger-bar"></span>
+        <span class="header__hamburger-bar"></span>
+        <span class="header__hamburger-bar"></span>
+      </button>
+
+      <!-- Logo -->
+      <div class="header__logo">
+        <a href="{{ routes.root_url }}">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}"
+              alt="{{ shop.name | escape }}"
+              class="header__logo-img"
+              width="{{ section.settings.logo_width }}"
+              height="auto"
+            >
+          {%- else -%}
+            <span class="header__logo-text">{{ shop.name | default: 'ATELIER' }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Desktop Navigation & Mega Menus -->
+      <nav class="header__nav" aria-label="Main Navigation">
+        <ul class="header__menu">
+          {%- for link in main_menu.links -%}
+            <li class="header__menu-item">
+              <a href="{{ link.url }}" class="header__menu-link">
+                <span>{{ link.title }}</span>
+                {%- if link.links.size > 0 -%}
+                  {% render 'icon', icon: 'chevron-down' %}
+                {%- endif -%}
+              </a>
+
+              {%- if link.links.size > 0 -%}
+                <div class="mega-menu">
+                  <div class="container">
+                    <div class="mega-menu__container">
+                      {%- for child_link in link.links -%}
+                        <div class="mega-menu__column">
+                          <div class="mega-menu__column-title">{{ child_link.title }}</div>
+                          <ul class="mega-menu__list">
+                            {%- for grandchild_link in child_link.links -%}
+                              <li>
+                                <a href="{{ grandchild_link.url }}" class="mega-menu__link">{{ grandchild_link.title }}</a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {%- endfor -%}
+
+                      <!-- Mega Menu Featured Editorial Card -->
+                      {%- for block in section.blocks -%}
+                        {%- if block.settings.menu_handle == link.handle -%}
+                          <div class="mega-menu__featured-card">
+                            {%- if block.settings.image != blank -%}
+                              <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.title | escape }}" class="mega-menu__featured-img" loading="lazy">
+                            {%- endif -%}
+                            <div class="mega-menu__featured-overlay"></div>
+                            <div class="mega-menu__featured-content">
+                              <div class="mega-menu__featured-title">{{ block.settings.title }}</div>
+                              <a href="{{ block.settings.link_url }}" class="mega-menu__featured-subtitle">{{ block.settings.link_text }}</a>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+
+      <!-- Header Action Icons -->
+      <div class="header__actions">
+        <!-- Search Trigger -->
+        <button type="button" class="header__icon-btn" data-open-search aria-label="{{ 'general.search.search' | t | default: 'Search' }}">
+          {% render 'icon', icon: 'search' %}
+        </button>
+
+        <!-- Customer Account -->
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="header__icon-btn" aria-label="Customer Account">
+            {% render 'icon', icon: 'user' %}
+          </a>
+        {%- endif -%}
+
+        <!-- Wishlist Trigger -->
+        <a href="/pages/wishlist" class="header__icon-btn" aria-label="{{ 'products.wishlist.title' | t | default: 'Wishlist' }}">
+          {% render 'icon', icon: 'heart' %}
+          <span class="header__badge-count wishlist-count" style="display: none;">0</span>
+        </a>
+
+        <!-- Cart Trigger -->
+        <button type="button" class="header__icon-btn" data-open-cart aria-label="{{ 'cart.title' | t | default: 'Shopping Bag' }}">
+          {% render 'icon', icon: 'cart' %}
+          <span class="header__badge-count cart-count" style="{% if cart.item_count == 0 %}display: none;{% endif %}">{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-menu-drawer" aria-hidden="true">
+  <div class="mobile-menu__header">
+    <span class="text-uppercase" style="font-weight: 700;">{{ shop.name | default: 'Menu' }}</span>
+    <button type="button" class="mobile-menu__close btn-ghost" aria-label="Close Navigation">
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </div>
+
+  <div class="mobile-menu__content">
+    <ul class="mobile-menu__list">
+      {%- for link in main_menu.links -%}
+        <li>
+          <a href="{{ link.url }}" class="mobile-menu__link">
+            <span>{{ link.title }}</span>
+            {%- if link.links.size > 0 -%}
+              {% render 'icon', icon: 'chevron-right' %}
+            {%- endif -%}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <div class="mobile-menu__footer">
+    <a href="/pages/wishlist" class="btn btn-secondary btn-full btn-sm" style="justify-content: space-between;">
+      <span>{{ 'products.wishlist.title' | t | default: 'Wishlist' }}</span>
+      <span class="wishlist-count badge badge-new" style="display: none;">0</span>
+    </a>
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="btn btn-secondary btn-full btn-sm">
+        {% if customer %}My Account{% else %}Sign In / Register{% endif %}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 60,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 130
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header",
+      "label": "Enable Transparent Header on Homepage Hero",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu_feature",
+      "name": "Mega Menu Featured Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_handle",
+          "label": "Menu Item Handle (e.g. shop, new-arrivals)",
+          "default": "shop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature Visual Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "Autumn / Winter Capsule"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Explore Editorial"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link Destination"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

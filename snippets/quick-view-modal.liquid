@@ -1,0 +1,14 @@
+{%- comment -%}
+  ATELIER LUXE — QUICK VIEW MODAL SNIPPET
+{%- endcomment -%}
+
+<div class="modal-dialog quick-view-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'products.product.quick_view' | t | default: 'Quick View' }}">
+  <div class="modal-dialog__content" style="max-width: 760px;">
+    <button type="button" class="modal-dialog__close" aria-label="{{ 'general.accessibility.close' | t | default: 'Close' }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+    <div class="quick-view-modal__body">
+      <!-- Populated dynamically via quick-view.js -->
+    </div>
+  </div>
+</div>

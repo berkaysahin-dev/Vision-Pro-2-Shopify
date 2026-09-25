@@ -1,0 +1,58 @@
+<section class="section-spacing">
+  <div class="container-narrow">
+    <div style="margin-bottom: var(--space-xl); text-align: center;">
+      <span class="text-uppercase text-accent">Client Concierge</span>
+      <h1 class="display-title" style="margin: 0.25rem 0 0.75rem;">{{ page.title | default: 'Direct Inquiries & Concierge' }}</h1>
+      <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 540px; margin: 0 auto; line-height: 1.6;">
+        For bespoke commissions, architectural orders, or patron assistance, our Milanese studio is at your service.
+      </p>
+    </div>
+
+    <div style="background: var(--color-surface); padding: clamp(2rem, 4vw, 3.5rem); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border);">
+      {% form 'contact' %}
+        {%- if form.posted_successfully? -%}
+          <div style="color: var(--color-stock-success); font-weight: 600; font-size: 1.125rem; text-align: center; padding: 2rem 0;">
+            Thank you for your dispatch. A concierge associate will respond within 24 hours.
+          </div>
+        {%- else -%}
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="ContactFormName">Name</label>
+              <input type="text" name="contact[name]" id="ContactFormName" class="form-input" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ContactFormEmail">Email Address</label>
+              <input type="email" name="contact[email]" id="ContactFormEmail" class="form-input" placeholder="email@domain.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ContactFormInquiry">Inquiry Nature</label>
+            <select name="contact[inquiry_type]" id="ContactFormInquiry" class="form-select">
+              <option value="General Concierge">General Patron Concierge</option>
+              <option value="Order & Logistics">Order & Global Logistics</option>
+              <option value="Bespoke / Architectural Commission">Bespoke / Architectural Commission</option>
+              <option value="Press & Media Relations">Press & Editorial Dispatch</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ContactFormMessage">Message</label>
+            <textarea name="contact[body]" id="ContactFormMessage" rows="5" class="form-textarea" placeholder="How may we assist you?" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 1rem;">
+            Transmit Inquiry
+          </button>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Concierge",
+  "settings": []
+}
+{% endschema %}

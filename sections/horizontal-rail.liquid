@@ -1,0 +1,93 @@
+{%- liquid
+  assign rail_collection = collections[section.settings.collection]
+  assign limit = section.settings.products_to_show | default: 6
+-%}
+
+<section class="horizontal-rail-section" data-reveal="fade-up" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-lg);">
+    <div>
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.title | default: 'The Signature Series' }}</h2>
+    </div>
+    <div style="display: flex; gap: 0.5rem;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.horizontal-rail-section').querySelector('.horizontal-rail-track').scrollBy({left: -320, behavior: 'smooth'});" aria-label="Scroll left">
+        ←
+      </button>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.horizontal-rail-section').querySelector('.horizontal-rail-track').scrollBy({left: 320, behavior: 'smooth'});" aria-label="Scroll right">
+        →
+      </button>
+    </div>
+  </div>
+
+  <div class="horizontal-rail-track">
+    {%- if rail_collection != blank and rail_collection.products.size > 0 -%}
+      {%- for product in rail_collection.products limit: limit -%}
+        <div class="horizontal-rail-card">
+          {% render 'product-card', card_product: product %}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..limit) -%}
+        <div class="horizontal-rail-card">
+          <div class="product-card">
+            <div class="product-card__media-wrapper ratio--portrait" style="display: flex; align-items: center; justify-content: center; background: var(--color-surface); color: var(--color-text-muted);">
+              {{ 'product-' | append: i | placeholder_svg_tag }}
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__vendor">Vision SH Edition</span>
+              <h3 class="product-card__title"><a href="/collections/all">Spatial Pedestal 0{{ i }}</a></h3>
+              <div class="product-card__price">$240.00</div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Horizontal Product Rail",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Horizontal Showcase"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The Signature Series"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "label": "Products in Rail",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Horizontal Product Rail"
+    }
+  ]
+}
+{% endschema %}

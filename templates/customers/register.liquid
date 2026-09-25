@@ -1,0 +1,45 @@
+<section class="section-spacing">
+  <div class="container-narrow" style="max-width: 460px;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span class="text-uppercase text-muted">Join Atelier</span>
+      <h1 class="h2" style="margin: 0.25rem 0 0.5rem;">{{ 'customer.register.title' | t | default: 'Create Patron Account' }}</h1>
+    </div>
+
+    <div style="background: var(--color-surface); padding: 2.5rem 2rem; border-radius: var(--border-radius-lg); border: 1px solid var(--color-border);">
+      {% form 'create_customer' %}
+        {{ form.errors | default_errors }}
+
+        <div class="form-group">
+          <label class="form-label" for="FirstName">{{ 'customer.register.first_name' | t | default: 'First Name' }}</label>
+          <input type="text" name="customer[first_name]" id="FirstName" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="LastName">{{ 'customer.register.last_name' | t | default: 'Last Name' }}</label>
+          <input type="text" name="customer[last_name]" id="LastName" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="Email">{{ 'customer.register.email' | t | default: 'Email Address' }}</label>
+          <input type="email" name="customer[email]" id="Email" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="Password">{{ 'customer.register.password' | t | default: 'Password' }}</label>
+          <input type="password" name="customer[password]" id="Password" class="form-input" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" style="height: 48px; margin-top: 1rem;">
+          {{ 'customer.register.submit' | t | default: 'Create Account' }}
+        </button>
+
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 13px; color: var(--color-text-muted);">
+          <span>Already registered? </span>
+          <a href="{{ routes.account_login_url }}" style="color: var(--color-text); font-weight: 600; text-decoration: underline;">
+            {{ 'customer.register.have_account' | t | default: 'Sign in' }}
+          </a>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>

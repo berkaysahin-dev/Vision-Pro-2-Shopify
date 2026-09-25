@@ -1,0 +1,28 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Atelier Gift Card</title>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+</head>
+<body style="background: #0F1115; color: #FFFFFF; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem;">
+  <div style="max-width: 480px; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+    <span class="text-uppercase text-muted" style="letter-spacing: 0.15em;">{{ shop.name }}</span>
+    <h1 class="h2">Atelier Digital Card</h1>
+    
+    <div style="background: linear-gradient(135deg, #1C202A 0%, #2A303F 100%); padding: 2.5rem 2rem; border-radius: var(--border-radius-lg); border: 1px solid rgba(255, 255, 255, 0.15); width: 100%; box-shadow: var(--shadow-lg);">
+      <div style="font-size: 2.25rem; font-weight: 700; color: #C6A87D; margin-bottom: 1rem;">
+        {{ gift_card.balance | money_with_currency }}
+      </div>
+      <div style="background: #0F1115; padding: 0.75rem 1rem; border-radius: 4px; font-family: monospace; font-size: 1.125rem; letter-spacing: 0.15em; border: 1px dashed rgba(255,255,255,0.3);">
+        {{ gift_card.code | format_code }}
+      </div>
+    </div>
+
+    <p style="font-size: 13px; color: #94A3B8;">Use this exclusive redemption code during checkout at {{ shop.name }}.</p>
+    <a href="{{ shop.url }}" class="btn btn-white btn-full">Enter Store</a>
+  </div>
+</body>
+</html>

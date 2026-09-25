@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "badge": "Stay Informed",
+        "title": "Join the Atelier Society",
+        "subtitle": "Receive subsequent monographs and design dispatches directly to your inbox.",
+        "bg_color": "#F8F9FA"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

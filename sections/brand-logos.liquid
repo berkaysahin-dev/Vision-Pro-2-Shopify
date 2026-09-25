@@ -1,0 +1,72 @@
+<section class="section-spacing-sm" style="background-color: {{ section.settings.bg_color }}; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <div style="text-align: center; margin-bottom: 1.5rem; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted);">
+        {{ section.settings.title }}
+      </div>
+    {%- endif -%}
+
+    <div class="brand-logos-row">
+      {%- for block in section.blocks -%}
+        <div class="brand-logo-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 200 }}" alt="{{ block.settings.text | escape }}" style="max-height: 28px; width: auto;" loading="lazy">
+          {%- else -%}
+            <span>{{ block.settings.text }}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Logos / Press",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label",
+      "default": "FEATURED IN GLOBAL ARCHITECTURAL PUBLICATIONS"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Brand / Press Logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Publication Name",
+          "default": "WALLPAPER*"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo Image (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Logos / Press",
+      "blocks": [
+        { "type": "logo", "settings": { "text": "WALLPAPER*" } },
+        { "type": "logo", "settings": { "text": "MONOCLE" } },
+        { "type": "logo", "settings": { "text": "WIRED" } },
+        { "type": "logo", "settings": { "text": "HYPEBEAST" } },
+        { "type": "logo", "settings": { "text": "ARCHITECTURAL DIGEST" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

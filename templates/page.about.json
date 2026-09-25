@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "editorial_story": {
+      "type": "editorial-story",
+      "settings": {
+        "subtitle": "Origin & Manifesto",
+        "title": "Architectural Restraint. Pure Materiality.",
+        "quote": "We craft enduring spatial objects that bring tactile serenity to modern technological life.",
+        "body_text": "Founded in Milan with engineering studios in Tokyo, Atelier was born from a desire to strip away superficial noise and focus purely on materials, micro-tolerances, and human proportion.",
+        "cta_text": "Explore Our Catalog",
+        "cta_url": "/collections/all",
+        "bg_color": "#FFFFFF"
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_right",
+        "subheading": "Bespoke Metallurgy",
+        "heading": "Aerospace Grade 5 Titanium",
+        "text": "Every pedestal and housing is CNC-machined from solid billet titanium with 0.02mm tolerances, followed by multi-pass hand polishing and satin bead-blasting.",
+        "button_label": "Discover Series 02",
+        "button_link": "/collections/all",
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "before_after": {
+      "type": "before-after",
+      "settings": {
+        "subtitle": "Process & Craft",
+        "title": "From Raw Ingot to Architectural Pedestal",
+        "description": "Slide to observe the difference between raw CNC-milled metal and our proprietary satin hand finish.",
+        "bg_color": "#FFFFFF"
+      }
+    },
+    "brand_logos": {
+      "type": "brand-logos",
+      "settings": {
+        "title": "ACCLAIMED ACROSS INTERNATIONAL ARCHITECTURAL MEDIA",
+        "bg_color": "#F8F9FA"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "badge": "Atelier Monograph",
+        "title": "Join the Atelier Society",
+        "subtitle": "Receive private invitations, seasonal preview catalogs, and editorial design perspectives.",
+        "bg_color": "#FFFFFF"
+      }
+    }
+  },
+  "order": [
+    "editorial_story",
+    "image_with_text",
+    "before_after",
+    "brand_logos",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,129 @@
+{%- comment -%}
+  ATELIER LUXE — CART DRAWER SNIPPET
+  Slide-Out AJAX Drawer with Dynamic Free Shipping Threshold & Upsells
+{%- endcomment -%}
+
+{%- liquid
+  assign free_shipping_threshold = settings.cart_free_shipping_threshold | default: 150
+  assign threshold_cents = free_shipping_threshold | times: 100
+  assign current_total = cart.total_price
+  assign remaining_cents = threshold_cents | minus: current_total
+  assign progress_percent = current_total | times: 100 | divided_by: threshold_cents
+  if progress_percent > 100
+    assign progress_percent = 100
+  endif
+-%}
+
+<div class="cart-drawer-container" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'cart.title' | t | default: 'Shopping Bag' }}">
+  <!-- Drawer Header -->
+  <div class="cart-drawer__header">
+    <div class="cart-drawer__title">
+      <span>{{ 'cart.title' | t | default: 'Shopping Bag' }}</span>
+      <span class="cart-drawer__count-badge">{{ cart.item_count }} {{ 'cart.title' | t | default: 'items' }}</span>
+    </div>
+    <button type="button" class="cart-drawer__close-btn" aria-label="{{ 'general.accessibility.close_cart' | t | default: 'Close Bag' }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </div>
+
+  <!-- Dynamic Free Shipping Threshold Meter -->
+  {%- if settings.cart_enable_free_shipping_bar -%}
+    <div class="cart-drawer__shipping-bar {% if remaining_cents <= 0 %}is-unlocked{% endif %}">
+      <div class="cart-drawer__shipping-message">
+        {%- if remaining_cents <= 0 -%}
+          {{ settings.cart_free_shipping_unlocked_message | default: '✨ You qualify for Free Worldwide Express Shipping!' }}
+        {%- else -%}
+          Add <strong>{{ remaining_cents | money }}</strong> more to unlock Free Worldwide Express Shipping
+        {%- endif -%}
+      </div>
+      <div class="cart-drawer__shipping-progress">
+        <div class="cart-drawer__shipping-progress-fill" style="width: {{ progress_percent }}%;"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Empty Cart State -->
+  <div class="cart-drawer__empty" style="{% if cart.item_count > 0 %}display: none;{% endif %}">
+    {% render 'icon', icon: 'cart' %}
+    <h3>{{ 'cart.empty' | t | default: 'Your shopping bag is empty' }}</h3>
+    <p class="text-muted" style="font-size: 14px;">Explore our new seasonal arrivals and design essentials.</p>
+    <a href="/collections/all" class="btn btn-primary btn-sm" style="margin-top: 0.5rem;">
+      {{ 'cart.empty_cta' | t | default: 'Discover New Arrivals' }}
+    </a>
+  </div>
+
+  <!-- Cart Line Items -->
+  <div class="cart-drawer__items" style="{% if cart.item_count == 0 %}display: none;{% endif %}">
+    {%- for item in cart.items -%}
+      <div class="cart-drawer-item" data-key="{{ item.key }}">
+        <div class="cart-drawer-item__image">
+          {%- if item.image -%}
+            <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" loading="lazy" width="80" height="100">
+          {%- endif -%}
+        </div>
+        <div class="cart-drawer-item__details">
+          <a href="{{ item.url }}" class="cart-drawer-item__title">{{ item.product.title }}</a>
+          {%- unless item.product.has_only_default_variant -%}
+            <span class="cart-drawer-item__variant">{{ item.variant.title }}</span>
+          {%- endunless -%}
+          <div class="cart-drawer-item__price">{{ item.final_line_price | money }}</div>
+          <div class="cart-drawer-item__actions">
+            <div class="quantity-stepper" style="height: 32px;">
+              <button type="button" class="quantity-stepper__btn cart-qty-btn" data-key="{{ item.key }}" data-qty="{{ item.quantity }}" data-delta="-1">-</button>
+              <input type="text" class="quantity-stepper__input" value="{{ item.quantity }}" readonly style="width: 32px; font-size: 12px;">
+              <button type="button" class="quantity-stepper__btn cart-qty-btn" data-key="{{ item.key }}" data-qty="{{ item.quantity }}" data-delta="1">+</button>
+            </div>
+            <button type="button" class="cart-drawer-item__remove" data-key="{{ item.key }}">
+              {{ 'cart.remove' | t | default: 'Remove' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <!-- In-Drawer Upsells -->
+  {%- if settings.cart_enable_upsells and settings.cart_upsell_collection != blank -%}
+    {%- assign upsell_collection = collections[settings.cart_upsell_collection] -%}
+    {%- if upsell_collection.products.size > 0 -%}
+      <div class="cart-drawer__upsells">
+        <div class="cart-drawer__upsells-title">{{ 'cart.upsell_title' | t | default: 'Complete Your Look' }}</div>
+        {%- for product in upsell_collection.products limit: 1 -%}
+          <div class="cart-drawer-upsell-item">
+            {%- if product.featured_media -%}
+              <img src="{{ product.featured_media | image_url: width: 90 }}" alt="{{ product.title }}" class="cart-drawer-upsell-item__img" loading="lazy" width="44" height="44">
+            {%- endif -%}
+            <div class="cart-drawer-upsell-item__info">
+              <div class="cart-drawer-upsell-item__title">{{ product.title }}</div>
+              <div class="cart-drawer-upsell-item__price">{{ product.price | money }}</div>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm cart-upsell-btn" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+              {{ 'cart.add_upsell' | t | default: 'Add +' }}
+            </button>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <!-- Drawer Footer -->
+  <div class="cart-drawer__footer" style="{% if cart.item_count == 0 %}display: none;{% endif %}">
+    <div class="cart-drawer__subtotal-row">
+      <span>{{ 'cart.subtotal' | t | default: 'Subtotal' }}</span>
+      <span class="cart-drawer__subtotal-price">{{ cart.total_price | money }}</span>
+    </div>
+    <div class="cart-drawer__taxes-notice">
+      {{ 'cart.taxes_and_shipping_policy_at_checkout_html' | t: link: routes.cart_url | default: 'Taxes and shipping calculated at checkout.' }}
+    </div>
+    <form action="/checkout" method="post">
+      <button type="submit" name="checkout" class="btn btn-primary cart-drawer__checkout-btn">
+        {{ 'cart.checkout' | t | default: 'Proceed to Secure Checkout' }}
+      </button>
+    </form>
+    <div class="cart-drawer__trust-badges">
+      <span>🔒 256-Bit SSL Encrypted</span>
+      <span>•</span>
+      <span>⚡ Instant Processing</span>
+    </div>
+  </div>
+</div>

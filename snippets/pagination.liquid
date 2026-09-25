@@ -1,0 +1,31 @@
+{%- comment -%}
+  ATELIER LUXE — PAGINATION SNIPPET
+{%- endcomment -%}
+
+{%- if paginate.parts.size > 0 -%}
+  <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.page_count' | t: current: paginate.current_page, total: paginate.pages | default: 'Pagination' }}" style="margin-top: 3rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+    {%- if paginate.previous -%}
+      <a href="{{ paginate.previous.url }}" class="btn btn-secondary btn-sm" aria-label="{{ 'general.pagination.previous' | t | default: 'Previous' }}">
+        ← Previous
+      </a>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" class="btn btn-secondary btn-sm" style="min-width: 36px; padding: 0.5rem;">{{ part.title }}</a>
+      {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+          <span class="btn btn-primary btn-sm" aria-current="page" style="min-width: 36px; padding: 0.5rem;">{{ part.title }}</span>
+        {%- else -%}
+          <span style="padding: 0 0.5rem; color: var(--color-text-muted);">{{ part.title }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a href="{{ paginate.next.url }}" class="btn btn-secondary btn-sm" aria-label="{{ 'general.pagination.next' | t | default: 'Next' }}">
+        Next →
+      </a>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

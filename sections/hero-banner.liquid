@@ -1,0 +1,172 @@
+{%- liquid
+  assign text_align = section.settings.text_alignment | default: 'left'
+  assign is_fullscreen = section.settings.enable_fullscreen
+-%}
+
+<section class="hero-banner {% if is_fullscreen %}hero--full-screen{% endif %}" style="min-height: {{ section.settings.height_mobile }}vh;">
+  <!-- Background Media (Image or Video) with Parallax -->
+  <div class="hero-banner__media">
+    {%- if section.settings.video_url != blank -%}
+      <video autoplay loop muted playsinline poster="{{ section.settings.image | image_url: width: 1920 }}">
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 2400 }}"
+        alt="{{ section.settings.heading | escape }}"
+        loading="eager"
+        width="2400"
+        height="1400"
+        data-parallax="true"
+        data-parallax-speed="0.1"
+      >
+    {%- else -%}
+      <div style="width: 100%; height: 100%; background: radial-gradient(circle at 60% 40%, #1A202C 0%, #0B0C10 70%); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 80%; height: 80%; opacity: 0.15;">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Ambient Overlay -->
+  <div class="hero-banner__overlay" style="background: rgba(11, 12, 16, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+
+  <!-- Content Container -->
+  <div class="container" style="position: relative; z-index: 3; width: 100%;">
+    <div class="hero-banner__content" style="align-items: {% if text_align == 'center' %}center{% elsif text_align == 'right' %}flex-end{% else %}flex-start{% endif %}; text-align: {{ text_align }}; {% if text_align == 'center' %}margin: 0 auto;{% endif %}">
+      {%- if section.settings.badge != blank -%}
+        <span class="badge hero-banner__badge">{{ section.settings.badge }}</span>
+      {%- endif -%}
+
+      <h1 class="display-title hero-banner__title" data-split-reveal>
+        {{ section.settings.heading | default: 'Architectural Form.
+Pure Function.' }}
+      </h1>
+
+      <p class="hero-banner__subtitle">
+        {{ section.settings.subheading | default: 'Explore a considered collection of minimalist luxury accessories, spatial audio pedestals, and precision-machined titanium hardware.' }}
+      </p>
+
+      <div class="hero-banner__actions">
+        {%- if section.settings.primary_cta_text != blank -%}
+          <a href="{{ section.settings.primary_cta_url | default: '/collections/all' }}" class="btn btn-white btn-lg">
+            {{ section.settings.primary_cta_text }} →
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_cta_text != blank -%}
+          <a href="{{ section.settings.secondary_cta_url | default: '/pages/about' }}" class="btn btn-secondary btn-lg" style="color: #FFFFFF; border-color: rgba(255, 255, 255, 0.4);">
+            {{ section.settings.secondary_cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="hero-scroll-indicator">
+    <span>SCROLL</span>
+    <span style="font-size: 14px;">↓</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Direct Video MP4 URL (Optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fullscreen",
+      "label": "Enable 100vh Fullscreen Mode",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Mobile Height",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Darkness",
+      "default": 45
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Pill Badge Text",
+      "default": "Series 02 Edition"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Hero Heading",
+      "default": "Architectural Form.\nPure Function."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore a considered collection of minimalist luxury accessories, spatial audio pedestals, and precision-machined titanium hardware."
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA Label",
+      "default": "Explore Series 02"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_url",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA Label",
+      "default": "Our Craft Monograph"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_url",
+      "label": "Secondary CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

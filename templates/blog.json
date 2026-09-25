@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "badge": "Monograph Dispatch",
+        "title": "Subscribe to the Atelier Journal",
+        "subtitle": "Essays on architectural industrial design, spatial computing, and metallurgy.",
+        "bg_color": "#F8F9FA"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

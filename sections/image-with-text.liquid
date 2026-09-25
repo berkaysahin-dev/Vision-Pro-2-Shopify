@@ -1,0 +1,106 @@
+{%- liquid
+  assign layout_reverse = false
+  if section.settings.layout == 'image_right'
+    assign layout_reverse = true
+  endif
+-%}
+
+<section class="section-spacing" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 4vw, 5rem); align-items: center; {% if layout_reverse %}direction: rtl;{% endif %} @media (min-width: 990px) { grid-template-columns: 1fr 1fr; }">
+      <!-- Media -->
+      <div style="direction: ltr; border-radius: var(--border-radius-lg); overflow: hidden; background: var(--color-surface); aspect-ratio: 4/3;">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+        {%- else -%}
+          <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Text -->
+      <div style="direction: ltr; display: flex; flex-direction: column; gap: 1.25rem;">
+        {%- if section.settings.subheading != blank -%}
+          <span class="text-uppercase text-muted">{{ section.settings.subheading }}</span>
+        {%- endif -%}
+        <h2 class="h2" style="font-size: clamp(1.75rem, 1.35rem + 1.5vw, 2.5rem);">
+          {{ section.settings.heading | default: 'Meticulous Materiality' }}
+        </h2>
+        <p style="color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.7;">
+          {{ section.settings.text | default: 'We source only French vegetable-tanned calfskin, German neodymium magnets, and aerospace-certified titanium alloys. Every detail is balanced for lifetime tactile pleasure.' }}
+        </p>
+        {%- if section.settings.button_label != blank -%}
+          <div>
+            <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn btn-primary">
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with Text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image Position",
+      "options": [
+        { "value": "image_left", "label": "Image on Left" },
+        { "value": "image_right", "label": "Image on Right" }
+      ],
+      "default": "image_left"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Material Integrity"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Meticulous Materiality"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Body Text",
+      "default": "We source only French vegetable-tanned calfskin, German neodymium magnets, and aerospace-certified titanium alloys. Every detail is balanced for lifetime tactile pleasure."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Explore Materials"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

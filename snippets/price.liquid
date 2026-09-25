@@ -1,0 +1,28 @@
+{%- comment -%}
+  ATELIER LUXE — PRICE SNIPPET
+  Renders regular price, compare at price, and calculated discount pill
+{%- endcomment -%}
+
+{%- liquid
+  assign target = product_resource | default: product
+  assign price = target.price | default: 19900
+  assign compare_at_price = target.compare_at_price
+  assign available = target.available | default: true
+  assign on_sale = false
+
+  if compare_at_price > price
+    assign on_sale = true
+    assign savings_amount = compare_at_price | minus: price
+    assign savings_percent = savings_amount | times: 100 | divided_by: compare_at_price
+  endif
+-%}
+
+<div class="product-card__price">
+  {%- if on_sale -%}
+    <span class="product-card__price--sale">{{ price | money }}</span>
+    <span class="product-card__price--compare">{{ compare_at_price | money }}</span>
+    <span class="product-card__discount-tag">-{{ savings_percent }}%</span>
+  {%- else -%}
+    <span>{{ price | money }}</span>
+  {%- endif -%}
+</div>

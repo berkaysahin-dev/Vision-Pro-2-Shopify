@@ -1,0 +1,103 @@
+<section class="section-spacing">
+  <div class="container">
+    <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-lg);" data-reveal="fade-up">
+      <div class="section-subtitle">Browse</div>
+      <h1 class="display-title" style="margin: 0.25rem 0 0.75rem;">All Collections</h1>
+    </div>
+
+    <div class="collections-list-grid">
+      {%- for collection in collections -%}
+        {%- if collection.handle != 'frontpage' -%}
+          <a href="{{ collection.url }}" class="collection-list-card" data-reveal="fade-up">
+            <div class="collection-list-card__image">
+              {%- if collection.image -%}
+                <img
+                  src="{{ collection.image | image_url: width: 800 }}"
+                  alt="{{ collection.title | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                >
+              {%- elsif collection.products.first and collection.products.first.featured_media -%}
+                <img
+                  src="{{ collection.products.first.featured_media | image_url: width: 800 }}"
+                  alt="{{ collection.title | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                >
+              {%- else -%}
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--color-surface);">
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="collection-list-card__info">
+              <h2 class="collection-list-card__title">{{ collection.title }}</h2>
+              <span class="collection-list-card__count">{{ collection.products_count }} {{ 'collections.general.items_count' | t | default: 'products' }}</span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .collections-list-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .collections-list-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .collection-list-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .collection-list-card__image {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .collection-list-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .collection-list-card:hover .collection-list-card__image img {
+    transform: scale(1.04);
+  }
+
+  .collection-list-card__title {
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+  }
+
+  .collection-list-card__count {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collections List",
+  "settings": []
+}
+{% endschema %}

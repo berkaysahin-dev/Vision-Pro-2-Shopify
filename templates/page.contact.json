@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "subtitle": "Direct Answers",
+        "title": "Concierge & Delivery FAQ",
+        "bg_color": "#F8F9FA"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

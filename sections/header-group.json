@@ -1,0 +1,17 @@
+{
+  "name": "Header Group",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_width": 130,
+        "menu": "main-menu",
+        "enable_transparent_header": true
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

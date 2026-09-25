@@ -1,0 +1,20 @@
+<section class="section-spacing">
+  <div class="container">
+    <div style="margin-bottom: var(--space-xl); text-align: center;">
+      <span class="text-uppercase text-muted">Private Selection</span>
+      <h1 class="display-title" style="margin: 0.25rem 0 0.5rem;">{{ 'products.wishlist.title' | t | default: 'Your Curated Wishlist' }}</h1>
+    </div>
+
+    <!-- Dynamic Grid injected by wishlist.js -->
+    <div data-wishlist-grid style="display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(230px, 20vw, 300px), 1fr)); gap: clamp(1rem, 2.5vw, 2.5rem);">
+      <!-- Rendered dynamically -->
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wishlist Page",
+  "settings": []
+}
+{% endschema %}

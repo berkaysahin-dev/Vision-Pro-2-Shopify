@@ -1,0 +1,62 @@
+{%- comment -%}
+  ATELIER LUXE — SIZE & FIT GUIDE MODAL SNIPPET
+{%- endcomment -%}
+
+<div class="modal-dialog size-guide-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'products.product.size_guide' | t | default: 'Size & Fit Guide' }}">
+  <div class="modal-dialog__content" style="max-width: 640px; padding: 2.5rem;">
+    <button type="button" class="modal-dialog__close" aria-label="{{ 'general.accessibility.close' | t | default: 'Close' }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+    
+    <div class="size-guide-modal__body">
+      <span class="text-uppercase text-muted">Precision Sizing</span>
+      <h3 style="font-size: 1.75rem; margin: 0.25rem 0 1.25rem;">Size & Fit Guide</h3>
+      <p style="font-size: 14px; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+        All Atelier items are crafted according to international architectural and tailoring standards. For optimal comfort and fit, refer to the dimensions below.
+      </p>
+
+      <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--color-border);">
+              <th style="padding: 0.75rem 0.5rem; font-weight: 600;">Size</th>
+              <th style="padding: 0.75rem 0.5rem; font-weight: 600;">Chest / Width (cm)</th>
+              <th style="padding: 0.75rem 0.5rem; font-weight: 600;">Length (cm)</th>
+              <th style="padding: 0.75rem 0.5rem; font-weight: 600;">US / EU Equivalent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding: 0.75rem 0.5rem; font-weight: 600;">S (Small)</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">96 - 100 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">68 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">36 - 38</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding: 0.75rem 0.5rem; font-weight: 600;">M (Medium)</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">102 - 106 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">70 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">38 - 40</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding: 0.75rem 0.5rem; font-weight: 600;">L (Large)</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">108 - 114 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">72 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">42 - 44</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding: 0.75rem 0.5rem; font-weight: 600;">XL (Extra Large)</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">116 - 122 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">74 cm</td>
+              <td style="padding: 0.75rem 0.5rem; color: var(--color-text-muted);">46 - 48</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: var(--color-surface); padding: 1rem; border-radius: var(--border-radius-sm); font-size: 12px; color: var(--color-text-muted);">
+        <strong>Fitting Tip:</strong> If you are in between sizes, we recommend ordering one size up for a more relaxed drape, or your standard size for a tailored silhouette.
+      </div>
+    </div>
+  </div>
+</div>

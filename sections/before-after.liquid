@@ -1,0 +1,96 @@
+<section class="section-spacing" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="section-header text-center" data-reveal="fade-up">
+      {%- if section.settings.subtitle != blank -%}
+        <div class="section-subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.title | default: 'The Art of Micro-Finishing' }}</h2>
+      {%- if section.settings.description != blank -%}
+        <p style="color: var(--color-text-muted); max-width: 600px; margin: 0.5rem auto 0;">
+          {{ section.settings.description }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Before / After Interactive Slider -->
+    <div class="before-after-slider" data-before-after data-reveal="fade-up">
+      <!-- Before Image (CNC Raw) -->
+      {%- if section.settings.image_before != blank -%}
+        <img src="{{ section.settings.image_before | image_url: width: 1600 }}" alt="Raw CNC Machined" class="before-after-slider__img before-after-slider__img--before" loading="lazy">
+      {%- else -%}
+        <div class="before-after-slider__img before-after-slider__img--before" style="background: linear-gradient(135deg, #181B22 0%, #2A303C 100%); display: flex; align-items: center; justify-content: center; color: #94A3B8;">
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; letter-spacing: 0.1em;">RAW BILLET</div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.5rem; opacity: 0.7;">CNC Micro-Milled (0.02mm)</div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- After Image (Satin Hand Buffed) -->
+      <div class="before-after-slider__img--after-wrap">
+        {%- if section.settings.image_after != blank -%}
+          <img src="{{ section.settings.image_after | image_url: width: 1600 }}" alt="Hand Buffed Satin" class="before-after-slider__img" loading="lazy">
+        {%- else -%}
+          <div class="before-after-slider__img" style="background: linear-gradient(135deg, #0A0C10 0%, #151821 100%); display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-secondary);">SATIN LUSTER</div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.5rem; opacity: 0.7;">Hand-Buffed Anodized Finish</div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Drag Handle -->
+      <div class="before-after-slider__handle">
+        <div class="before-after-slider__handle-btn">↔</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Before / After Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Finishing Process"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The Art of Micro-Finishing"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Slide to observe the meticulous transition from raw CNC-milled billet to our multi-stage hand-buffed satin finish."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before Image (e.g. Raw Machined)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After Image (e.g. Hand Finished)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After Slider"
+    }
+  ]
+}
+{% endschema %}

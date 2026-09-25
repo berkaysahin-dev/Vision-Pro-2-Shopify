@@ -1,0 +1,51 @@
+{%- comment -%}
+  ATELIER LUXE — BREADCRUMB NAVIGATION SNIPPET
+  Semantic, Accessible Breadcrumbs
+{%- endcomment -%}
+
+{%- unless template == 'index' or template == 'cart' or template == '404' -%}
+  <nav class="breadcrumb-nav container" aria-label="breadcrumbs" style="padding-top: 1rem; padding-bottom: 0.5rem; font-size: 12px; color: var(--color-text-muted);">
+    <ol style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;">
+      <li>
+        <a href="{{ routes.root_url }}" style="color: inherit;">{{ 'general.breadcrumbs.home' | t | default: 'Home' }}</a>
+      </li>
+      <span>/</span>
+
+      {%- if template contains 'page' -%}
+        <li>
+          <span aria-current="page" style="color: var(--color-text);">{{ page.title }}</span>
+        </li>
+      {%- elsif template contains 'product' -%}
+        {%- if collection.url -%}
+          <li>
+            <a href="{{ collection.url }}" style="color: inherit;">{{ collection.title }}</a>
+          </li>
+          <span>/</span>
+        {%- endif -%}
+        <li>
+          <span aria-current="page" style="color: var(--color-text);">{{ product.title }}</span>
+        </li>
+      {%- elsif template contains 'collection' and collection.handle -%}
+        <li>
+          <span aria-current="page" style="color: var(--color-text);">{{ collection.title }}</span>
+        </li>
+      {%- elsif template contains 'blog' -%}
+        <li>
+          <span aria-current="page" style="color: var(--color-text);">{{ blog.title }}</span>
+        </li>
+      {%- elsif template contains 'article' -%}
+        <li>
+          <a href="{{ blog.url }}" style="color: inherit;">{{ blog.title }}</a>
+        </li>
+        <span>/</span>
+        <li>
+          <span aria-current="page" style="color: var(--color-text);">{{ article.title }}</span>
+        </li>
+      {%- else -%}
+        <li>
+          <span aria-current="page" style="color: var(--color-text);">{{ page_title }}</span>
+        </li>
+      {%- endif -%}
+    </ol>
+  </nav>
+{%- endunless -%}

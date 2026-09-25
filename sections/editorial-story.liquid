@@ -1,0 +1,119 @@
+<section class="section-spacing story-section" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="story-grid">
+      <!-- Left Column: Typography & Story -->
+      <div style="display: flex; flex-direction: column; gap: var(--space-md);" data-reveal="fade-up">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="section-subtitle">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+
+        <h2 class="h2">{{ section.settings.title | default: 'Where Architectural Restraint Meets Tactile Luxury.' }}</h2>
+
+        {%- if section.settings.quote != blank -%}
+          <div class="story-quote">
+            "{{ section.settings.quote }}"
+          </div>
+        {%- endif -%}
+
+        <div style="color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.8;">
+          <p>{{ section.settings.body_text | default: 'Founded in Milan with engineering studios in Tokyo, Vision SH operates on the conviction that digital tools should exist in total aesthetic harmony with refined physical environments.' }}</p>
+        </div>
+
+        {%- if section.settings.cta_text != blank -%}
+          <div>
+            <a href="{{ section.settings.cta_url | default: '/pages/about' }}" class="btn btn-secondary">
+              {{ section.settings.cta_text }} →
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right Column: Asymmetric Layered Imagery -->
+      <div class="story-images" data-reveal="fade-up">
+        <div class="story-img-main">
+          {%- if section.settings.image_main != blank -%}
+            <img src="{{ section.settings.image_main | image_url: width: 900 }}" alt="{{ section.settings.title | escape }}" loading="lazy">
+          {%- else -%}
+            <div style="width: 100%; aspect-ratio: 4/5; background: #16181F; display: flex; align-items: center; justify-content: center; color: #475569; border-radius: var(--border-radius-lg);">
+              {{ 'lifestyle-1' | placeholder_svg_tag }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="story-img-secondary">
+          {%- if section.settings.image_secondary != blank -%}
+            <img src="{{ section.settings.image_secondary | image_url: width: 600 }}" alt="{{ section.settings.title | escape }}" loading="lazy">
+          {%- else -%}
+            <div style="width: 100%; aspect-ratio: 1/1; background: #1E222D; display: flex; align-items: center; justify-content: center; color: #64748B; border-radius: var(--border-radius);">
+              {{ 'lifestyle-2' | placeholder_svg_tag }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Brand Story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Design Philosophy"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Where Architectural Restraint Meets Tactile Luxury."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Editorial Quote",
+      "default": "We do not build ordinary accessories. We craft timeless spatial artifacts designed to elevate the human touch."
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body Description",
+      "default": "Founded in Milan with engineering studios in Tokyo, Vision SH operates on the conviction that digital tools should exist in total aesthetic harmony with refined physical environments."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Link Text",
+      "default": "Read the Vision SH Monograph"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Link Destination"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_main",
+      "label": "Primary Large Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_secondary",
+      "label": "Overlapping Secondary Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F8F9FA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Brand Story"
+    }
+  ]
+}
+{% endschema %}
